@@ -6,31 +6,60 @@
 // .catch(er => console.log(er));
 
 import mysql from 'mysql';
+const { promisify }= require('util');
 
 // Agregue las credenciales para acceder a su base de datos
-var connection = mysql.createConnection({
+// var connection = mysql.createConnection({
+//     host     : 'te-learning.com',
+//     user     : 'gpa_user',
+//     password : 'gpa_user',
+//     database : 'proyecto_gpa'
+// });
+
+// // conectarse a mysql
+// connection.connect(function(err) {
+//     // en caso de error
+//     if(!!err){
+//         console.log(err);
+//         console.log(err.code);
+//         console.log(err.fatal);
+//     }
+//     else{
+//         console.log("Conexion exitosa");
+//     }
+// });
+
+
+const database= {
+    connectionLimit: 10,
     host     : 'te-learning.com',
-    user     : 'gpa_user',
-    password : 'gpa_user',
-    database : 'proyecto_gpa'
-});
+     user     : 'gpa_user',
+     password : 'gpa_user',
+     database : 'proyecto_gpa'
+}
 
-// conectarse a mysql
-connection.connect(function(err) {
-    // en caso de error
-    if(!!err){
-        console.log(err);
-        console.log(err.code);
-        console.log(err.fatal);
+const pool= mysql.createPool(database);
+pool.getConnection((err, connection) => {
+    if (err) {
+      if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+        console.error('Database connection was closed.');
+      }
+      if (err.code === 'ER_CON_COUNT_ERROR') {
+        console.error('Database has to many connections');
+      }
+      if (err.code === 'ECONNREFUSED') {
+        console.error('Database connection was refused');
+      }
     }
-    else{
-        console.log("Conexion exitosa");
-    }
-});
+  
+    if (connection) connection.release();
+    console.log('DB is Connected');
+  
+    return;
+  });
+
+  pool.query = promisify(pool.query);
 
 
-
-
-// connection.end();
-
-module.exports = connection;
+// module.exports = connection;module.exports = pool;
+module.exports = pool;

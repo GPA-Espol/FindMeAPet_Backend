@@ -1,62 +1,36 @@
 import Mascota from '../models/mascota'
-const connection = require('../database')
+const pool = require('../database');
+
 
 export const getMascotas = async (req, res) => {
-    
-     connection.query("SELECT * from mascota",function(err, results, fields) {
-         if(err){
-             console.log("An error ocurred performing the query.");
-             return;
-         }else{
-             res.status(200).json(results);
-            console.log("Consulta ejecutada con éxito");
-            results.forEach(element => {
-                console.log(element);
-            });
-         }
-        
-     });
-  
+    const registros = await pool.query("SELECT * FROM mascota");
+    res.status(200).json(registros);
+
+
 };
 export const createMascota = async (req, res) => {
+    console.log(req.body.edad);
+    const { nombre, edad, color, is_esterilizado, is_adoptado, is_caso_externo, is_adoptable, descripcion, sexo, fecha_adopcion, ubicacion, estado, id_personalidad } = req.body;
+    if (nombre === undefined || edad === undefined || color === undefined || is_esterilizado === undefined || is_adoptado === undefined || is_caso_externo === undefined || is_adoptable === undefined || descripcion === undefined || sexo === undefined || fecha_adopcion === undefined || ubicacion === undefined || estado === undefined || id_personalidad === undefined) {
+        res.status(400).json("Debe llenar todos los campos");
+        return;
+    }
+    const mascotaCreada = await pool.query("insert into mascota(nombre,edad,color,is_esterilizado,is_adoptado,is_caso_externo,is_adoptable,descripcion,sexo,fecha_adopcion,ubicacion,estado,id_personalidad) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", [nombre, edad, color, is_esterilizado, is_adoptado, is_caso_externo, is_adoptable, descripcion, sexo, fecha_adopcion, ubicacion, estado, id_personalidad])
+    console.log(mascotaCreada);
+    res.status(200).json("Mascota creada");
 
-//     $query = 'SELECT * from MyTable LIMIT 10';
 
-// connection.query($query, function(err, rows, fields) {
-//     if(err){
-//         console.log("An error ocurred performing the query.");
-//         return;
-//     }
-
-//     console.log("Consulta ejecutada con éxito:", rows);
-// });
-
-// // Cerrar la conexión
-// connection.end(function(){
-//     // La conexión se ha cerrado
-// });
-    
 };
 
 export const updateMascotaById = async (req, res) => {
-    
+
 };
 export const getMascotaById = async (req, res) => {
-    connection.query("SELECT * from mascota where id = ?",[req.params.mascotaId],function(err, results, fields) {
-        if(err){
-            console.log("An error ocurred performing the query.");
-            return;
-        }else{
-            res.status(200).json(results);
-           console.log("Consulta ejecutada con éxito");
-           results.forEach(element => {
-               console.log(element);
-           });
-        }
-        
-    });
+    const registros = await pool.query("SELECT * from mascota where id = ?", [req.params.mascotaId]);
+    res.status(200).json(registros);
+
 
 };
 export const deleteMascotaById = async (req, res) => {
-    
+
 };
