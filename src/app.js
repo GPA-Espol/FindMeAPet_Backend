@@ -5,8 +5,6 @@ import authRoutes from './routes/auth.routes';
 import jwt from 'jsonwebtoken';
 const app = express();
 
-
-
 app.use(express.json());
 // app.use(morgan('dev'));
 app.get('/',(req,res)=>{
