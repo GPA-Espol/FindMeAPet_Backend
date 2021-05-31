@@ -1,12 +1,11 @@
 import express from 'express';
-// import morgan from 'morgan';
+import morgan from 'morgan';
 import mascotaRoutes from './routes/mascota.routes';
 import authRoutes from './routes/auth.routes';
-import jwt from 'jsonwebtoken';
 const app = express();
 
 app.use(express.json());
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.get('/',(req,res)=>{
     res.json('welcome');
 });
