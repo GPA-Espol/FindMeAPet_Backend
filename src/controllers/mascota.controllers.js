@@ -17,7 +17,7 @@ export const createMascota = async (req, res) => {
     }
     const mascotaCreada = await pool.query("insert into mascota(nombre,edad,color,is_esterilizado,is_adoptado,is_caso_externo,is_adoptable,descripcion,sexo,fecha_adopcion,ubicacion,estado,id_personalidad) values(?,?,?,?,?,?,?,?,?,?,?,?,?)", [nombre, edad, color, is_esterilizado, is_adoptado, is_caso_externo, is_adoptable, descripcion, sexo, fecha_adopcion, ubicacion, estado, id_personalidad])
     console.log(mascotaCreada);
-    res.status(200).json("Mascota creada");
+    res.status(201).json("Mascota creada");
 
 
 };
