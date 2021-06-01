@@ -1,7 +1,8 @@
 const pool = require('../database');
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken')
+// import jwt from 'jsonwebtoken';
 
-export const login = async (req, res) => {
+exports.login = async (req, res) => {
     console.log(req.body);
     const registros = await pool.query("SELECT * FROM usuario where usuario = ? and contrasena = ? and estado ='A'",[req.body.usuario,req.body.password]);
     console.log(registros,registros.length,registros[0].id);

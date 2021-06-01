@@ -1,14 +1,14 @@
-import Mascota from '../models/mascota'
+// import Mascota from '../models/mascota'
 const pool = require('../database');
 
 
-export const getMascotas = async (req, res) => {
+exports.getMascotas = async (req, res) => {
     const registros = await pool.query("SELECT * FROM mascota");
     res.status(200).json(registros);
 
 
 };
-export const createMascota = async (req, res) => {
+exports.createMascota = async (req, res) => {
     console.log(req.body.edad);
     const { nombre, edad, color, is_esterilizado, is_adoptado, is_caso_externo, is_adoptable, descripcion, sexo, fecha_adopcion, ubicacion, estado, id_personalidad } = req.body;
     if (nombre === undefined || edad === undefined || color === undefined || is_esterilizado === undefined || is_adoptado === undefined || is_caso_externo === undefined || is_adoptable === undefined || descripcion === undefined || sexo === undefined || fecha_adopcion === undefined || ubicacion === undefined || estado === undefined || id_personalidad === undefined) {
@@ -22,15 +22,15 @@ export const createMascota = async (req, res) => {
 
 };
 
-export const updateMascotaById = async (req, res) => {
+exports.updateMascotaById = async (req, res) => {
 
 };
-export const getMascotaById = async (req, res) => {
+exports.getMascotaById = async (req, res) => {
     const registros = await pool.query("SELECT * from mascota where id = ?", [req.params.mascotaId]);
     res.status(200).json(registros);
 
 
 };
-export const deleteMascotaById = async (req, res) => {
+exports.deleteMascotaById = async (req, res) => {
 
 };
