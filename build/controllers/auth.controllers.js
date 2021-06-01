@@ -28,7 +28,7 @@ var login = /*#__PURE__*/function () {
 
           case 3:
             registros = _context.sent;
-            console.log(registros.length, registros[0].id);
+            console.log(registros, registros.length, registros[0].id);
 
             if (!(registros.length !== 1)) {
               _context.next = 8;

@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 export const login = async (req, res) => {
     console.log(req.body);
     const registros = await pool.query("SELECT * FROM usuario where usuario = ? and contrasena = ? and estado ='A'",[req.body.usuario,req.body.password]);
-    console.log(registros.length,registros[0].id);
+    console.log(registros,registros.length,registros[0].id);
     if(registros.length!==1){
         res.json("Usuario no existe");
         return;
