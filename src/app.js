@@ -7,7 +7,7 @@ const mascotaRoutes = require('./routes/mascota.routes')
 // import authRoutes from './routes/auth.routes';
 const authRoutes = require('./routes/auth.routes')
 const app = express();
-
+app.set('port', (process.env.PORT || 3000));
 app.use(express.json());
 app.use(morgan('dev'));
 app.get('/',(req,res)=>{
