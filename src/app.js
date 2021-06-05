@@ -2,6 +2,8 @@
 const express = require('express')
 // import morgan from 'morgan';
 const morgan = require('morgan')
+
+
 // import mascotaRoutes from './routes/mascota.routes';
 const mascotaRoutes = require('./routes/mascota.routes')
 // import authRoutes from './routes/auth.routes';
