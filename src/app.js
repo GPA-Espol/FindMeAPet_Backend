@@ -4,11 +4,15 @@ const express = require('express')
 const morgan = require('morgan')
 const sequelize = require('../src/database')
 
-// import mascotaRoutes from './routes/mascota.routes';
 const mascotaRoutes = require('./routes/mascota.routes')
-// import authRoutes from './routes/auth.routes';
 const authRoutes = require('./routes/auth.routes')
+
+let cors = require('cors')
+
 const app = express();
+
+app.use(cors());
+app.options('*', cors());
 app.set('port', (process.env.PORT || 3000));
 app.use(express.json());
 app.use(morgan('dev'));
