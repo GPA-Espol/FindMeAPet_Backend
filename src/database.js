@@ -5,7 +5,8 @@
 // .then(db => console.log("Conectado a mongo atlas"))
 // .catch(er => console.log(er));
 
-import mysql from 'mysql';
+// import mysql from 'mysql';
+const mysql = require('mysql')
 const { promisify }= require('util');
 
 // Agregue las credenciales para acceder a su base de datos
