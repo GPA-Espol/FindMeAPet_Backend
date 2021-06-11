@@ -1,5 +1,3 @@
-// import Mascota from '../models/mascota'
-const pool = require("../database");
 const Mascota = require("../models/mascota")
 
 
@@ -77,7 +75,7 @@ exports.getMascotaById = async (req, res) => {
     where: {
       id: req.params.mascotaId
     }
-  });
+  })
   
   res.status(200).json(data);
 };
