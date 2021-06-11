@@ -4,8 +4,11 @@ const Mascota = require("../models/mascota")
 
 
 exports.getMascotas = async (req, res) => {
-  const registros = await pool.query("SELECT * FROM mascota");
-  res.status(200).json(registros);
+  const data= await Mascota.findAll({
+    attributes: ['id','nombre', 'edad_mes','edad_anio','ubicacion','descripcion']
+  });
+  
+  res.status(200).json(data);
 };
 exports.createMascota = async (req, res) => {
   console.log(req.body)
@@ -70,14 +73,14 @@ exports.createMascota = async (req, res) => {
 
 exports.updateMascotaById = async (req, res) => {};
 exports.getMascotaById = async (req, res) => {
-  const registros = await pool.query("SELECT * from mascota where id = ?", [
-    req.params.mascotaId,
-  ]);
-  res.status(200).json(registros);
+  const data= await Mascota.findAll({
+    where: {
+      id: req.params.mascotaId
+    }
+  });
+  
+  res.status(200).json(data);
 };
 exports.deleteMascotaById = async (req, res) => {
-    const registros = await pool.query("UPDATE mascota set estado='I' where id = ?", [
-        req.params.mascotaId,
-      ]);
-      res.status(200).json(registros);
+    
 };
