@@ -71,7 +71,63 @@ exports.createMascota = async (req, res) => {
   
 };
 
-exports.updateMascotaById = async (req, res) => {};
+exports.updateMascotaById = async (req, res) => {
+  const {
+    nombre,
+    edad_mes,
+    edad_anio,
+    color,
+    is_esterilizado,
+    is_adoptado,
+    is_caso_externo,
+    is_adoptable,
+    descripcion,
+    sexo,
+    fecha_adopcion,
+    ubicacion
+    
+  } = req.body;
+  if (
+    nombre === undefined ||
+    edad_anio === undefined ||
+    edad_mes === undefined ||
+    color === undefined ||
+    is_esterilizado === undefined ||
+    is_adoptado === undefined ||
+    is_caso_externo === undefined ||
+    is_adoptable === undefined ||
+    descripcion === undefined ||
+    sexo === undefined ||
+    fecha_adopcion === undefined ||
+    ubicacion === undefined 
+  ) {
+    res.status(400).json("Debe llenar todos los campos");
+    return;
+  }
+
+  await Mascota.update({
+    nombre: nombre,
+    edad_mes: edad_mes,
+    edad_anio:edad_anio,
+    color: color,
+    is_esterilizado: is_esterilizado,
+    is_adoptado: is_adoptado,
+    is_caso_externo: is_caso_externo,
+    is_adoptable: is_adoptable,
+    descripcion: descripcion,
+    sexo:sexo,
+    fecha_adopcion:fecha_adopcion,
+    ubicacion:ubicacion
+  },{
+    where:{
+      id : req.params.mascotaId
+    }
+  }).then(mascota => {
+    res.status(201).json("Mascota actualizada");
+  });
+
+  
+};
 exports.getMascotaById = async (req, res) => {
   const data= await Mascota.findAll({
     where: {
