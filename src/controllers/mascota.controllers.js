@@ -5,7 +5,9 @@ const Mascota = require("../models/mascota")
 
 exports.getMascotas = async (req, res) => {
   const data= await Mascota.findAll({
-    attributes: ['id','nombre', 'edad_mes','edad_anio','ubicacion','descripcion']
+    attributes: ['id','nombre', 'edad_mes','edad_anio','color','is_esterilizado',
+     'is_adoptado', 'is_caso_externo','is_adoptable','descripcion','sexo',
+    'fecha_adopcion','ubicacion','tipo_mascota',]
   });
   
   res.status(200).json(data);
@@ -26,8 +28,7 @@ exports.createMascota = async (req, res) => {
     sexo,
     fecha_adopcion,
     ubicacion,
-    estado
-    
+    tipo_mascota
   } = req.body;
   if (
     nombre === undefined ||
@@ -42,7 +43,7 @@ exports.createMascota = async (req, res) => {
     sexo === undefined ||
     fecha_adopcion === undefined ||
     ubicacion === undefined ||
-    estado === undefined 
+    tipo_mascota === undefined 
   ) {
     res.status(400).json("Debe llenar todos los campos");
     return;
@@ -60,7 +61,7 @@ exports.createMascota = async (req, res) => {
     sexo:sexo,
     fecha_adopcion:fecha_adopcion,
     ubicacion:ubicacion,
-    estado:estado
+    tipo_mascota:tipo_mascota,
   }).then(user => {
     res.status(201).json("Mascota creada");
   })
@@ -71,7 +72,20 @@ exports.createMascota = async (req, res) => {
   
 };
 
-exports.updateMascotaById = async (req, res) => {};
+exports.updateMascotaById = async (req,res) => {
+  try{
+   let body = req.body;
+   let data = await Mascota.update(body,{
+    where:{
+     id:req.params.mascotaId
+    }
+   });
+   res.status(200).json(req.body);
+  }catch(error){
+    res.status(400).json('Error en la actualizacion');
+  }
+ };
+
 exports.getMascotaById = async (req, res) => {
   const data= await Mascota.findAll({
     where: {
@@ -82,5 +96,14 @@ exports.getMascotaById = async (req, res) => {
   res.status(200).json(data);
 };
 exports.deleteMascotaById = async (req, res) => {
-    
+try{
+  const data= await Mascota.destroy({
+    where: {
+      id: req.params.mascotaId
+    }
+  });
+  res.status(200).json('ok');
+}catch(error){
+  res.status(400).json('Error al eliminar');
+}
 };
