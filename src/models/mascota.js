@@ -21,7 +21,8 @@ Mascota.init(
     sexo: DataTypes.CHAR,
     fecha_adopcion: DataTypes.DATEONLY,
     ubicacion: DataTypes.STRING(400),
-    estado: DataTypes.CHAR,
+    tipo_mascota: DataTypes.STRING(400),
+ 
   },
   { sequelize, modelName: "mascota" }
 );
