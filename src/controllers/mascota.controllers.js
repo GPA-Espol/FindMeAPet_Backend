@@ -5,9 +5,9 @@ const Mascota = require("../models/mascota")
 
 exports.getMascotas = async (req, res) => {
   const data= await Mascota.findAll({
-    attributes: ['id','nombre', 'edad_mes','edad_anio','color','is_esterilizado',
+    attributes: ['id','nombre', 'fecha_nacimiento','color','is_esterilizado',
      'is_adoptado', 'is_caso_externo','is_adoptable','descripcion','sexo',
-    'fecha_adopcion','ubicacion','tipo_mascota',]
+    'fecha_adopcion','ubicacion','tipo_mascota',"imagen_url"]
   });
   
   res.status(200).json(data);
@@ -17,8 +17,7 @@ exports.createMascota = async (req, res) => {
   
   const {
     nombre,
-    edad_mes,
-    edad_anio,
+    fecha_nacimiento,
     color,
     is_esterilizado,
     is_adoptado,
@@ -28,12 +27,12 @@ exports.createMascota = async (req, res) => {
     sexo,
     fecha_adopcion,
     ubicacion,
-    tipo_mascota
+    tipo_mascota,
+    imagen_url
   } = req.body;
   if (
     nombre === undefined ||
-    edad_anio === undefined ||
-    edad_mes === undefined ||
+    fecha_nacimiento == undefined ||
     color === undefined ||
     is_esterilizado === undefined ||
     is_adoptado === undefined ||
@@ -43,15 +42,15 @@ exports.createMascota = async (req, res) => {
     sexo === undefined ||
     fecha_adopcion === undefined ||
     ubicacion === undefined ||
-    tipo_mascota === undefined 
+    tipo_mascota === undefined ||
+    imagen_url === undefined 
   ) {
     res.status(400).json("Debe llenar todos los campos");
     return;
   }
   await Mascota.create({
     nombre: nombre,
-    edad_mes: edad_mes,
-    edad_anio:edad_anio,
+    fecha_nacimiento : fecha_nacimiento,
     color: color,
     is_esterilizado: is_esterilizado,
     is_adoptado: is_adoptado,
@@ -62,6 +61,7 @@ exports.createMascota = async (req, res) => {
     fecha_adopcion:fecha_adopcion,
     ubicacion:ubicacion,
     tipo_mascota:tipo_mascota,
+    imagen_url:imagen_url,
   }).then(user => {
     res.status(201).json("Mascota creada");
   })
