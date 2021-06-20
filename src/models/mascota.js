@@ -10,8 +10,7 @@ Mascota.init(
       autoIncrement: true,
     },
     nombre: DataTypes.STRING(400),
-    edad_mes: DataTypes.INTEGER,
-    edad_anio: DataTypes.INTEGER,
+    fecha_nacimiento: DataTypes.DATEONLY,
     color: DataTypes.STRING(400),
     is_esterilizado: DataTypes.BOOLEAN,
     is_adoptado: DataTypes.BOOLEAN,
@@ -21,7 +20,9 @@ Mascota.init(
     sexo: DataTypes.CHAR,
     fecha_adopcion: DataTypes.DATEONLY,
     ubicacion: DataTypes.STRING(400),
-    estado: DataTypes.CHAR,
+    tipo_mascota: DataTypes.STRING(400),
+    imagen_url: DataTypes.STRING(400),
+ 
   },
   { sequelize, modelName: "mascota" }
 );
