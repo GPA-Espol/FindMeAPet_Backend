@@ -1,5 +1,3 @@
-// import Mascota from '../models/mascota'
-const pool = require("../database");
 const Mascota = require("../models/mascota")
 
 
@@ -85,13 +83,12 @@ exports.updateMascotaById = async (req,res) => {
     res.status(400).json('Error en la actualizacion');
   }
  };
-
 exports.getMascotaById = async (req, res) => {
   const data= await Mascota.findAll({
     where: {
       id: req.params.mascotaId
     }
-  });
+  })
   
   res.status(200).json(data);
 };
