@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../database");
 const Usuario = require("./usuario");
-class Rol extends Model {}
+class Rol extends Model { }
 Rol.init(
   {
     id: {
@@ -10,19 +10,18 @@ Rol.init(
       allowNull: false,
       autoIncrement: true,
     },
-    nombre:{
-        type: DataTypes.STRING,
-        allowNull: false,
+    nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    estado:{
-        type: DataTypes.CHAR,
-        allowNull: false,
+    estado: {
+      type: DataTypes.CHAR,
+      allowNull: false,
     }
   },
   { sequelize, modelName: "rol" }
 );
 Rol.hasOne(Usuario, {
-  foreignKey: 'rolId'
+  foreignKey: 'id_rol'
 });
-Usuario.belongsTo(Rol);
 module.exports = Rol;
