@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "analyzer": "clinic doctor -- node src/app.js"
   },
   "keywords": [],
   "author": "T2",

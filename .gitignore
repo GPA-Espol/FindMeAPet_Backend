@@ -1,1 +1,4 @@
 /node_modules
+.clinic
+.scannerwork
+sonar-project.properties

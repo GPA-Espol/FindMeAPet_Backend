@@ -1,6 +1,4 @@
-// import express from 'express';
 const express = require('express');
-// import morgan from 'morgan';
 const morgan = require('morgan');
 const sequelize = require('../src/database');
 const loadsampledb = require('../scriptdb');

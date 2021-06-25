@@ -1,9 +1,5 @@
 const { Sequelize } = require('sequelize');
 
-
-
-
-
 const sequelize = new Sequelize('proyecto_gpa', 'gpa_user', 'gpa_user', {
   host: 'te-learning.com',
   dialect: 'mysql',
@@ -14,6 +10,5 @@ const sequelize = new Sequelize('proyecto_gpa', 'gpa_user', 'gpa_user', {
   //   idle: 10000
   // }
 });
-
 
 module.exports = sequelize;
