@@ -23,8 +23,6 @@ exports.getMascotas = async (req, res) => {
   res.status(200).json(data);
 };
 exports.createMascota = async (req, res) => {
-  console.log(req.body);
-
   const {
     nombre,
     fecha_nacimiento,
@@ -72,9 +70,8 @@ exports.createMascota = async (req, res) => {
     tipo_mascota: tipo_mascota,
     imagen_url: imagen_url,
   }).then((user) => {
-    res.status(201).json('Mascota creada');
+    res.status(201).json(req.body);
   });
-  console.log(req.body.edad);
 };
 
 exports.updateMascotaById = async (req, res) => {
