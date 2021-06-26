@@ -55,7 +55,7 @@ exports.createMascota = async (req, res) => {
     res.status(400).json('Debe llenar todos los campos');
     return;
   }
-  await Mascota.create({
+  const mascota = await Mascota.create({
     nombre: nombre,
     fecha_nacimiento: fecha_nacimiento,
     color: color,
@@ -88,7 +88,7 @@ exports.updateMascotaById = async (req, res) => {
   }
 };
 exports.getMascotaById = async (req, res) => {
-  const data = await Mascota.findAll({
+  const data = await Mascota.findOne({
     where: {
       id: req.params.mascotaId,
     },
@@ -96,15 +96,17 @@ exports.getMascotaById = async (req, res) => {
 
   res.status(200).json(data);
 };
+
 exports.deleteMascotaById = async (req, res) => {
   try {
-    const data = await Mascota.destroy({
+    await Mascota.destroy({
       where: {
         id: req.params.mascotaId,
       },
     });
-    res.status(200).json('ok');
-  } catch (error) {
-    res.status(400).json('Error al eliminar');
+    res.status(204).send();
+  } catch {
+    res.status(404);
+    res.send({ error: 'No existe la mascota' });
   }
 };
