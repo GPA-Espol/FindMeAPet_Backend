@@ -1,19 +1,14 @@
 const { Sequelize } = require('sequelize');
+const config = require('./dbconfig');
 
-
-
-
-
-const sequelize = new Sequelize('proyecto_gpa', 'gpa_user', 'gpa_user', {
-  host: 'te-learning.com',
-  dialect: 'mysql',
-  // pool: {
-  //   max: 5,
-  //   min: 0,
-  //   acquire: 30000,
-  //   idle: 10000
-  // }
-});
-
+const sequelize = new Sequelize(
+  config.production.database,
+  config.production.username,
+  config.production.password,
+  {
+    host: config.production.host,
+    dialect: config.production.dialect,
+  }
+);
 
 module.exports = sequelize;

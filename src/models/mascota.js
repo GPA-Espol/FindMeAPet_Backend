@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../database");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../database');
 class Mascota extends Model {}
 Mascota.init(
   {
@@ -41,13 +41,13 @@ Mascota.init(
       type: DataTypes.STRING(400),
       allowNull: false,
     },
-    tipo_mascota:{
+    tipo_mascota: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
     imagen_url: DataTypes.STRING(400),
   },
-  { sequelize, modelName: "mascota" }
+  { sequelize, modelName: 'mascota' }
 );
 
 module.exports = Mascota;
