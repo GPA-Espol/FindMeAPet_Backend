@@ -15,6 +15,7 @@ app
     sequelize
       .sync({ force: false })
       .then(() => {
+        require('./auth/auth');
         console.log('Se ha conectado a la base exitosamente');
       })
       .catch((err) => {

@@ -13,9 +13,12 @@ function createServer() {
   app.set('port', port);
   app.use(express.json());
   app.use(morgan('dev'));
-
   app.use('/mascota', mascotaRoutes);
   app.use('/auth', authRoutes);
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.json({ error: err });
+  });
   return app;
 }
 
