@@ -12,7 +12,8 @@ exports.login = async (req, res, next) => {
           return res.status(401).json({ error });
         }
         const usuario = { rol: user.rol.nombre, id: user.id };
-        const token = jwt.sign({ usuario }, '$$Gp4_2021');
+        const secretKey = process.env.JWT_SECRET_KEY_FMAP || 'test_key';
+        const token = jwt.sign({ usuario }, secretKey);
         return res.status(200).json({ token, rol: usuario.rol, id: usuario.id });
       });
     } catch (error) {
