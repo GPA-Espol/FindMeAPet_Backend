@@ -1,6 +1,4 @@
-// import express from 'express';
 const express = require('express');
-// import morgan from 'morgan';
 const morgan = require('morgan');
 const sequelize = require('../src/database');
 const loadsampledb = require('../scriptdb');
@@ -18,6 +16,11 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.json());
 app.use(morgan('dev'));
 
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.json({ error: err });
+});
+
 app
   .get('/', function (request, response) {
     var result = 'App is running';
@@ -29,6 +32,7 @@ app
       .sync({ force: true })
       .then(() => {
         console.log('Se ha conectado a la base exitosamente');
+        require('./auth/auth');
         loadsampledb.loaddb();
         console.log('Se han cargado los datos de prueba exitosamente');
       })

@@ -99,6 +99,7 @@ exports.getMascotaById = async (req, res) => {
 
   res.status(200).json(data);
 };
+
 exports.deleteMascotaById = async (req, res) => {
   try {
     const data = await Mascota.destroy({
