@@ -39,7 +39,7 @@ passport.use(
 passport.use(
   new JWTstrategy(
     {
-      secretOrKey: '$$Gp4_2021',
+      secretOrKey: process.env.JWT_SECRET_KEY_FMAP || 'test_key',
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken('token'),
     },
     async (token, done) => {
