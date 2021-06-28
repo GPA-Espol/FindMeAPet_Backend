@@ -1,5 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../database');
+
+/**
+ *Class in charge to represent the table of mascota in database
+ * @category Models
+ */
 class Mascota extends Model {}
 Mascota.init(
   {

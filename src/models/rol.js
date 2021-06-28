@@ -1,6 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../database');
 const Usuario = require('./usuario');
+/**
+ * Class in charge to represent the table of rol in database
+ * @category Models
+ */
 class Rol extends Model {}
 Rol.init(
   {

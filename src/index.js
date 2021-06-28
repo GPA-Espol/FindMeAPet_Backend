@@ -2,7 +2,6 @@ const express = require('express');
 const createServer = require('./app');
 require('./database');
 const sequelize = require('./database');
-
 const app = createServer();
 
 app

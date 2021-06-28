@@ -1,5 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../database');
+/**
+ * Class in charge to represent the table of usuario in the database
+ * @category Models
+ */
 class Usuario extends Model {}
 Usuario.init(
   {
