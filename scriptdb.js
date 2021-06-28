@@ -22,7 +22,7 @@ async function loadMascota() {
     sexo: 'M',
     fecha_adopcion: '2019-01-01',
     ubicacion: 'Dentro espol',
-    tipo_mascota: 'gato',
+    tipo_mascota: 'Gato',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/amarillo.jpg?alt=media&token=40a75d30-d4b1-4417-9a29-897a4a9ae068',
   });
@@ -37,7 +37,7 @@ async function loadMascota() {
     descripcion: 'Es muy juguetona',
     sexo: 'H',
     ubicacion: 'Refugio',
-    tipo_mascota: 'gato',
+    tipo_mascota: 'Gato',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pensando%20en%20ti.webp?alt=media&token=053b73a1-0f8b-4e5e-9d6e-1d7b216b09da',
   });
@@ -52,7 +52,9 @@ async function loadMascota() {
     descripcion: 'Es carinosa',
     sexo: 'H',
     ubicacion: 'Dentro espol',
-    tipo_mascota: 'gato',
+    tipo_mascota: 'Gato',
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pantera.jpg?alt=media&token=ac4c584d-bc50-49ad-ac3f-826d02225cf8',
   });
   await Mascota.create({
     nombre: 'Panda',
@@ -65,7 +67,9 @@ async function loadMascota() {
     descripcion: 'Es feroz',
     sexo: 'M',
     ubicacion: 'Dentro espol',
-    tipo_mascota: 'gato',
+    tipo_mascota: 'Gato',
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pensando%20en%20ti.webp?alt=media&token=053b73a1-0f8b-4e5e-9d6e-1d7b216b09da',
   });
   await Mascota.create({
     nombre: 'Pototo',
@@ -78,7 +82,7 @@ async function loadMascota() {
     descripcion: 'Es juguetona',
     sexo: 'M',
     ubicacion: 'Externo',
-    tipo_mascota: 'gato',
+    tipo_mascota: 'Gato',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pantera.jpg?alt=media&token=ac4c584d-bc50-49ad-ac3f-826d02225cf8',
   });
@@ -93,7 +97,7 @@ async function loadMascota() {
     descripcion: 'Es muy jugueton',
     sexo: 'M',
     ubicacion: 'Refugio',
-    tipo_mascota: 'perro',
+    tipo_mascota: 'Perro',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/husky-siberiano-bosque.jpg?alt=media&token=ad47cd95-ab9a-4150-aab2-ff3b37a2648f',
   });
@@ -109,7 +113,7 @@ async function loadMascota() {
     sexo: 'M',
     fecha_adopcion: '2019-01-01',
     ubicacion: 'Refugio',
-    tipo_mascota: 'gato',
+    tipo_mascota: 'Gato',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/teito.jpg?alt=media&token=1d2d830d-9962-4f99-ac7f-7616d76ec91a',
   });
