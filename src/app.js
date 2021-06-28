@@ -6,6 +6,10 @@ const authRoutes = require('./routes/auth.routes');
 let cors = require('cors');
 const port = process.env.PORT || 3000;
 
+/**
+ * Create server
+ * @returns {Application} - express aplication
+ */
 function createServer() {
   const app = express();
   app.use(cors());

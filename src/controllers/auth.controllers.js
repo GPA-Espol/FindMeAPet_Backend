@@ -5,6 +5,16 @@ const { Op } = require('sequelize');
 const Rol = require('../models/rol');
 const Usuario = require('../models/usuario');
 
+/**
+ * Auth controller
+ * @module AuthControllers
+ */
+
+/**
+ * Receive an HTTP request to log an user to the system, finding his/her role, save the jsonwebtoken in the localStorage and create the user instance if he/she logs in succesfuly.
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response
+ */
 exports.login = async (req, res) => {
   const hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
   console.log(hash);
