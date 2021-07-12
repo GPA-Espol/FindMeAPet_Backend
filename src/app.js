@@ -3,6 +3,8 @@ const morgan = require('morgan');
 
 const mascotaRoutes = require('./routes/mascota.routes');
 const authRoutes = require('./routes/auth.routes');
+const usuarioRoutes = require('./routes/usuario.routes');
+
 let cors = require('cors');
 const port = process.env.PORT || 3000;
 
@@ -19,6 +21,8 @@ function createServer() {
   app.use(morgan('dev'));
   app.use('/mascota', mascotaRoutes);
   app.use('/auth', authRoutes);
+  app.use('/usuario', usuarioRoutes);
+
   app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.json({ error: err });

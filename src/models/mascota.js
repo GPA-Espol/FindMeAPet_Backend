@@ -52,7 +52,7 @@ Mascota.init(
     },
     imagen_url: DataTypes.STRING(400),
   },
-  { sequelize, modelName: 'mascota' }
+  { underscored: true, sequelize, modelName: 'mascota' }
 );
 
 module.exports = Mascota;

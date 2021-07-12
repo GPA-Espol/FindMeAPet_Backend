@@ -23,7 +23,7 @@ Rol.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: 'rol' }
+  { underscored: true, sequelize, modelName: 'rol' }
 );
 
 Rol.hasMany(Usuario, {

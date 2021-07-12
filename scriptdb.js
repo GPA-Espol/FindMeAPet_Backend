@@ -2,11 +2,13 @@ const Mascota = require('./src/models/mascota');
 const Rol = require('./src/models/rol');
 const Usuario = require('./src/models/usuario');
 const crypto = require('crypto');
+const ReporteAsistencia = require('./src/models/reporteAsistencia');
 
 async function loaddb() {
   loadMascota();
   loadRol();
   loadUsuario();
+  loadReporteAsistencia();
 }
 
 async function loadMascota() {
@@ -168,11 +170,38 @@ async function loadUsuario() {
     estado: 'A',
     id_rol: 1,
   });
+
+  let contraAndreina = '12345andreina';
+  contraAndreina = crypto.createHash('sha256').update(contraJoha).digest('base64');
+  await Usuario.create({
+    nombre: 'Andreina',
+    apellido: 'Bravo Lino',
+    usuario: 'Andreina',
+    correo: 'anmabrav@espol.edu.ec',
+    contrasena: contraAndreina,
+    fecha_nacimiento: '1998-07-24',
+    sexo: 'F',
+    is_est_espol: 1,
+    estado: 'A',
+    id_rol: 2,
+  });
 }
 
 async function loadRol() {
   await Rol.create({ nombre: 'Admin', estado: 'A' });
   await Rol.create({ nombre: 'Voluntario', estado: 'A' });
 }
-
+async function loadReporteAsistencia() {
+  await ReporteAsistencia.create({
+    comida: 'Un cuarto',
+    mapa: '1-1-1-1-1-1-1-1-1-1-1-1-1-1',
+    id_usuario: 1,
+  });
+  await ReporteAsistencia.create({
+    comida: 'Un medio',
+    anomalia: 'Se registro comida fuera de los puntos de comida',
+    mapa: '1-1-1-1-1-1-1-1-1-1-1-1-1-1',
+    id_usuario: 2,
+  });
+}
 module.exports = { loaddb };
