@@ -1,0 +1,23 @@
+{
+  "opts": {
+    "recurse": true,
+    "destination": "./documentation/"
+  },
+  "tags": {
+    "allowUnknownTags": [
+      "optional",
+      "category"
+    ]
+  },
+  "plugins": ["plugins/markdown"],
+
+  "source": {
+    "include": ["src"],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|documentation)"
+
+  },
+  "templates": {
+    "cleverLinks": true
+  }
+}

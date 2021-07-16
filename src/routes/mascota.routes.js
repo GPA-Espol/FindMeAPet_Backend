@@ -11,5 +11,5 @@ routers.get('/', mascotaController.getMascotas);
 routers.get('/:mascotaId', mascotaController.getMascotaById);
 routers.put('/:mascotaId', authAdmin, mascotaController.updateMascotaById);
 routers.delete('/:mascotaId', authAdmin, mascotaController.deleteMascotaById);
-// export default routers;
+
 module.exports = routers;

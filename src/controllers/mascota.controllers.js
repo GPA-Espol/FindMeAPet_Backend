@@ -1,5 +1,14 @@
 const Mascota = require('../models/mascota');
+/**
+ * Mascota controller
+ * @module MascotaControllers
+ */
 
+/**
+ * Receive an HTTP request to get all the available pets on the database and response this informmation on the body of the HTTP response
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
+ */
 exports.getMascotas = async (req, res) => {
   const data = await Mascota.findAll({
     attributes: [
@@ -22,6 +31,12 @@ exports.getMascotas = async (req, res) => {
 
   res.status(200).json(data);
 };
+
+/**
+ * Receive an HTTP request to create a pet on the database
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 201 is succesfully, Otherwise 400
+ */
 exports.createMascota = async (req, res) => {
   const {
     nombre,
@@ -74,6 +89,11 @@ exports.createMascota = async (req, res) => {
   });
 };
 
+/**
+ * Receive an HTTP request to update a pet on the database
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
+ */
 exports.updateMascotaById = async (req, res) => {
   try {
     let body = req.body;
@@ -87,6 +107,11 @@ exports.updateMascotaById = async (req, res) => {
     res.status(400).json('Error en la actualizacion');
   }
 };
+/**
+ * Receive an HTTP request to get an specific pet on the database and response this informmation on the body of the HTTP response
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
+ */
 exports.getMascotaById = async (req, res) => {
   const data = await Mascota.findOne({
     where: {
@@ -97,6 +122,11 @@ exports.getMascotaById = async (req, res) => {
   res.status(200).json(data);
 };
 
+/**
+ * Receive an HTTP request to delete an specific pet on the database and response this informmation on the body of the HTTP response
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 204 is succesfully, Otherwise 404
+ */
 exports.deleteMascotaById = async (req, res) => {
   try {
     await Mascota.destroy({
