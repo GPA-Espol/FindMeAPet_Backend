@@ -64,7 +64,7 @@ Usuario.init(
       },
     },
   },
-  { underscored: true, sequelize, modelName: 'usuario' }
+  { underscored: true, sequelize, modelName: 'usuario', timestamps: false }
 );
 
 module.exports = Usuario;

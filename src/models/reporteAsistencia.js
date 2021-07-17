@@ -35,7 +35,7 @@ ReporteAsistencia.init(
       allowNull: false,
     },
   },
-  { underscored: true, sequelize, modelName: 'reporteAsistencia' }
+  { underscored: true, sequelize, modelName: 'reporteAsistencia', timestamps: false }
 );
 
 Usuario.hasMany(ReporteAsistencia, {
