@@ -9,7 +9,7 @@ const FormularioAdopcion = require('../models/formularioAdopcion');
  * @param {HTTP} rep - HTTP response status 201 is succesfully, Otherwise 400
  */
 exports.createAdopteForm = async (req, res) => {
-  const {
+  let {
     cedula,
     nombre,
     apellido,
@@ -21,7 +21,6 @@ exports.createAdopteForm = async (req, res) => {
     motivo,
     ubicacion,
     estado_civil,
-    estado,
     numero_mascotas,
     contacto_referencia,
     usuario_fb,
@@ -57,7 +56,6 @@ exports.createAdopteForm = async (req, res) => {
     motivo === undefined ||
     ubicacion === undefined ||
     estado_civil === undefined ||
-    estado === undefined ||
     numero_mascotas === undefined ||
     contacto_referencia === undefined ||
     usuario_fb === undefined ||
@@ -81,7 +79,117 @@ exports.createAdopteForm = async (req, res) => {
     situacion_inesperada_cambios === undefined ||
     id_mascota == undefined
   ) {
-    res.status(400).json({ message: 'Debe llenar algún campo' });
+    res.status(400).json('Faltan campos en su request');
+    return;
+  }
+  if (cedula === '') {
+    res.json('Debe ingresar la cedula');
+    return;
+  }
+  if (nombre === '') {
+    res.json('Debe ingresar el nombre');
+    return;
+  }
+  if (apellido === '') {
+    res.json('Debe ingresar el apellido');
+    return;
+  }
+  if (ciudad === '') {
+    res.json('Debe ingresar la ciudad');
+    return;
+  }
+  if (fecha_nacimiento === '') {
+    res.json('Debe ingresar la fecha de nacimiento');
+    return;
+  }
+  if (correo === '') {
+    res.json('Debe ingresar un correo');
+    return;
+  }
+  if (fecha === '') {
+    res.json('Debe ingresar la fecha');
+    return;
+  }
+  if (direccion === '') {
+    res.json('Debe ingresar la direccion');
+    return;
+  }
+  if (motivo === '') {
+    res.json('Debe ingresar el motivo');
+    return;
+  }
+  if (ubicacion === '') {
+    res.json('Debe ingresar la ubicacion');
+    return;
+  }
+  if (estado_civil === '') {
+    estado_civil = null;
+  }
+  if (numero_mascotas === '') {
+    numero_mascotas = null;
+  }
+  if (contacto_referencia === '') {
+    contacto_referencia = null;
+  }
+  if (usuario_fb === '') {
+    usuario_fb = null;
+  }
+  if (usuario_instagram === '') {
+    usuario_instagram = null;
+  }
+  if (is_tiene_mascotas === '') {
+    is_tiene_mascotas = null;
+  }
+  if (otras_mascotas === '') {
+    otras_mascotas = null;
+  }
+  if (is_mascotas_esterilizadas === '') {
+    is_mascotas_esterilizadas = null;
+  }
+  if (is_tenia_antes_mascotas === '') {
+    is_tenia_antes_mascotas = null;
+  }
+  if (situacion_mascotas_anteriores === '') {
+    situacion_mascotas_anteriores = null;
+  }
+  if (is_visitas_periodicas === '') {
+    is_visitas_periodicas = null;
+  }
+  if (is_convivencia_ninos === '') {
+    is_convivencia_ninos = null;
+  }
+  if (is_asmatico === '') {
+    is_asmatico = null;
+  }
+  if (tipo_domicilio === '') {
+    tipo_domicilio = null;
+  }
+  if (vision_adoptado === '') {
+    vision_adoptado = null;
+  }
+  if (is_espacio_suficiente === '') {
+    is_espacio_suficiente = null;
+  }
+  if (donde_dormir_mascotas === '') {
+    donde_dormir_mascotas = null;
+  }
+  if (tiempo_solo === '') {
+    tiempo_solo = null;
+  }
+  if (medidas_tomaria === '') {
+    medidas_tomaria = null;
+  }
+  if (is_esterilizaria_adoptado === '') {
+    is_esterilizaria_adoptado = null;
+  }
+  if (motivo_esterilizaria_adoptado === '') {
+    motivo_esterilizaria_adoptado = null;
+  }
+  if (situacion_inesperada_cambios === '') {
+    situacion_inesperada_cambios = null;
+  }
+  if (id_mascota == '') {
+    res.json('Debe seleccionar una mascota');
     return;
   }
 
@@ -97,7 +205,7 @@ exports.createAdopteForm = async (req, res) => {
     motivo: motivo,
     ubicacion: ubicacion,
     estado_civil: estado_civil,
-    estado: estado,
+    estado: 'PENDIENTE',
     numero_mascotas: numero_mascotas,
     contacto_referencia: contacto_referencia,
     usuario_fb: usuario_fb,
@@ -123,6 +231,6 @@ exports.createAdopteForm = async (req, res) => {
   };
   console.log(formulario);
   await FormularioAdopcion.create(formulario).then((form) => {
-    res.status(201).json(form);
+    res.status(201).json('Formulario enviado');
   });
 };

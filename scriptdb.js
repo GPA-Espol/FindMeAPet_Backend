@@ -219,7 +219,7 @@ async function loadFormularioAdopcion() {
     direccion: 'fco de marcos',
     motivo: 'motivo',
     ubicacion: 'refugio',
-    estado: 'Pendiente',
+    estado: 'PENDIENTE',
     estado_civil: 'Soltera',
     numero_mascotas: 1,
     contacto_referencia: '0993347678',
