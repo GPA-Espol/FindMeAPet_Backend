@@ -4,6 +4,7 @@ const Usuario = require('./src/models/usuario');
 const FormularioAdopcion = require('./src/models/formularioAdopcion');
 const crypto = require('crypto');
 const ReporteAsistencia = require('./src/models/reporteAsistencia');
+const Publicacion = require('./src/models/publicacion');
 
 async function loaddb() {
   loadMascota();
@@ -11,6 +12,7 @@ async function loaddb() {
   loadUsuario();
   loadReporteAsistencia();
   loadFormularioAdopcion();
+  loadPublicacion();
 }
 
 async function loadMascota() {
@@ -243,6 +245,27 @@ async function loadFormularioAdopcion() {
     motivo_esterilizaria_adoptado: null,
     situacion_inesperada_cambios: null,
     id_mascota: 1,
+  });
+}
+
+async function loadPublicacion() {
+  await Publicacion.create({
+    titulo: 'noticia 2',
+    imagen: 'la imagen',
+    descripcion: 'esto es una descripcion',
+    tipo_publicacion: 'noticia',
+    tag: 'perros',
+    fecha: '2021-2-3',
+    id_usuario: 1,
+  });
+  await Publicacion.create({
+    titulo: 'noticia 3',
+    imagen: 'la imagen',
+    descripcion: 'esto es una descripcion',
+    tipo_publicacion: 'evento',
+    tag: 'bingo',
+    fecha: '2021-2-3',
+    id_usuario: 1,
   });
 }
 
