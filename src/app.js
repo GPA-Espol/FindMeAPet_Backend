@@ -5,6 +5,7 @@ const mascotaRoutes = require('./routes/mascota.routes');
 const authRoutes = require('./routes/auth.routes');
 const usuarioRoutes = require('./routes/usuario.routes');
 const formAdopRoutes = require('./routes/formularioAdopcion.routes');
+const publicacionRoutes = require('./routes/publicacion.routes');
 
 let cors = require('cors');
 const port = process.env.PORT || 3000;
@@ -22,6 +23,7 @@ function createServer() {
   app.use(morgan('dev'));
   app.use('/mascota', mascotaRoutes);
   app.use('/auth', authRoutes);
+  app.use('/publicacion', publicacionRoutes);
   app.use('/form_adopcion', formAdopRoutes);
 
   app.use(function (err, req, res, next) {
