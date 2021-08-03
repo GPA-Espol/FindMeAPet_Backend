@@ -31,12 +31,12 @@ exports.getMascotas = async (req, res) => {
   for (imascota in data) {
     var edad = getAge(data[imascota]['fecha_nacimiento']);
     if (edad > 0) {
-      data[imascota]['dataValues']['edad'] = 'cachorro';
+      data[imascota]['dataValues']['categoria_edad'] = 'cachorro';
     } else {
       if (edad < 4) {
-        data[imascota]['dataValues']['edad'] = 'juvenil';
+        data[imascota]['dataValues']['categoria_edad'] = 'juvenil';
       } else {
-        data[imascota]['dataValues']['edad'] = 'adulto';
+        data[imascota]['dataValues']['categoria_edad'] = 'adulto';
       }
     }
   }
