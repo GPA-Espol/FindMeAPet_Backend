@@ -67,8 +67,7 @@ exports.createMascota = async (req, res) => {
     tipo_mascota === undefined ||
     imagen_url === undefined
   ) {
-    res.status(400).json('Debe llenar todos los campos');
-    return;
+    return res.status(400).json('Debe llenar todos los campos');
   }
   const mascota = await Mascota.create({
     nombre: nombre,
@@ -84,9 +83,8 @@ exports.createMascota = async (req, res) => {
     ubicacion: ubicacion,
     tipo_mascota: tipo_mascota,
     imagen_url: imagen_url,
-  }).then((user) => {
-    res.status(201).json(req.body);
   });
+  res.status(201).json({ id: mascota.getDataValue('id') });
 };
 
 /**
