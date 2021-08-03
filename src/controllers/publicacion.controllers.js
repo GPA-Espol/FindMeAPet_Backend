@@ -31,8 +31,7 @@ exports.createPublicacion = async (req, res) => {
     tag === undefined ||
     tipo_publicacion === undefined
   ) {
-    res.status(400).json('Debe llenar todos los campos');
-    return;
+    return res.status(400).json('Debe llenar todos los campos');
   }
   const publicacion = await Publicacion.create({
     titulo: titulo,
@@ -42,9 +41,8 @@ exports.createPublicacion = async (req, res) => {
     id_usuario: id_usuario,
     tag: tag,
     tipo_publicacion: tipo_publicacion,
-  }).then((news) => {
-    res.status(201).json('Pulicación creada');
   });
+  res.status(201).json({ id: publicacion.getDataValue('id') });
 };
 
 /**
@@ -61,12 +59,10 @@ exports.updatePublicacionById = async (req, res) => {
       fecha == undefined ||
       fecha.length === 0 ||
       imagen === undefined ||
-      imagen.length === 0 ||
       descripcion === undefined ||
       descripcion.length === 0 ||
       id_usuario === undefined ||
       tag === undefined ||
-      tag.length === 0 ||
       tipo_publicacion === undefined ||
       tipo_publicacion.length === 0
     ) {
