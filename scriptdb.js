@@ -7,12 +7,12 @@ const ReporteAsistencia = require('./src/models/reporteAsistencia');
 const Publicacion = require('./src/models/publicacion');
 
 async function loaddb() {
-  loadMascota();
-  loadRol();
-  loadUsuario();
-  loadReporteAsistencia();
-  loadFormularioAdopcion();
-  loadPublicacion();
+  await loadMascota();
+  await loadRol();
+  await loadUsuario();
+  await loadReporteAsistencia();
+  await loadFormularioAdopcion();
+  //await loadPublicacion();
 }
 
 async function loadMascota() {

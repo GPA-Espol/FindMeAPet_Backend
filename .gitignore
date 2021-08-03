@@ -2,3 +2,4 @@
 .clinic
 .scannerwork
 sonar-project.properties
+.env
