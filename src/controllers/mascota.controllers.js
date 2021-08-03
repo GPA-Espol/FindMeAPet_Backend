@@ -28,7 +28,18 @@ exports.getMascotas = async (req, res) => {
       'imagen_url',
     ],
   });
-
+  for (imascota in data) {
+    var edad = getAge(data[imascota]['fecha_nacimiento']);
+    if (edad > 0) {
+      data[imascota]['dataValues']['edad'] = 'cachorro';
+    } else {
+      if (edad < 4) {
+        data[imascota]['dataValues']['edad'] = 'juvenil';
+      } else {
+        data[imascota]['dataValues']['edad'] = 'adulto';
+      }
+    }
+  }
   res.status(200).json(data);
 };
 
@@ -138,3 +149,15 @@ exports.deleteMascotaById = async (req, res) => {
     res.send({ error: 'No existe la mascota' });
   }
 };
+
+function getAge(dateString) {
+  var today = new Date();
+  var cumple = dateString.split('-');
+  var birthDate = new Date(cumple[0], cumple[1], cumple[2]);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}

@@ -27,10 +27,18 @@ Rol.init(
 );
 
 Rol.hasMany(Usuario, {
-  foreignKey: 'id_rol',
+  foreignKey: {
+    name: 'id_rol',
+    allowNull: false,
+  },
+  sourceKey: 'id',
 });
 
 Usuario.belongsTo(Rol, {
-  foreignKey: 'id_rol',
+  foreignKey: {
+    name: 'id_rol',
+    allowNull: false,
+  },
+  sourceKey: 'id',
 });
 module.exports = Rol;
