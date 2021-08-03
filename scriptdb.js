@@ -1,12 +1,18 @@
 const Mascota = require('./src/models/mascota');
 const Rol = require('./src/models/rol');
 const Usuario = require('./src/models/usuario');
+const FormularioAdopcion = require('./src/models/formularioAdopcion');
 const crypto = require('crypto');
+const ReporteAsistencia = require('./src/models/reporteAsistencia');
+const Publicacion = require('./src/models/publicacion');
 
 async function loaddb() {
   loadMascota();
   loadRol();
   loadUsuario();
+  loadReporteAsistencia();
+  loadFormularioAdopcion();
+  loadPublicacion();
 }
 
 async function loadMascota() {
@@ -21,8 +27,8 @@ async function loadMascota() {
     descripcion: 'Es cazador y muy jugueton',
     sexo: 'M',
     fecha_adopcion: '2019-01-01',
-    ubicacion: 'DENTRO_ESPOL',
-    tipo_mascota: 'gato',
+    ubicacion: 'Dentro espol',
+    tipo_mascota: 'Gato',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/amarillo.jpg?alt=media&token=40a75d30-d4b1-4417-9a29-897a4a9ae068',
   });
@@ -36,8 +42,8 @@ async function loadMascota() {
     is_adoptable: 1,
     descripcion: 'Es muy juguetona',
     sexo: 'H',
-    ubicacion: 'REFUGIO',
-    tipo_mascota: 'gato',
+    ubicacion: 'Refugio',
+    tipo_mascota: 'Gato',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pensando%20en%20ti.webp?alt=media&token=053b73a1-0f8b-4e5e-9d6e-1d7b216b09da',
   });
@@ -51,8 +57,10 @@ async function loadMascota() {
     is_adoptable: 1,
     descripcion: 'Es carinosa',
     sexo: 'H',
-    ubicacion: 'DENTRO_ESPOL',
-    tipo_mascota: 'gato',
+    ubicacion: 'Dentro espol',
+    tipo_mascota: 'Gato',
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pantera.jpg?alt=media&token=ac4c584d-bc50-49ad-ac3f-826d02225cf8',
   });
   await Mascota.create({
     nombre: 'Panda',
@@ -64,8 +72,10 @@ async function loadMascota() {
     is_adoptable: 0,
     descripcion: 'Es feroz',
     sexo: 'M',
-    ubicacion: 'DENTRO_ESPOL',
-    tipo_mascota: 'gato',
+    ubicacion: 'Dentro espol',
+    tipo_mascota: 'Gato',
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pensando%20en%20ti.webp?alt=media&token=053b73a1-0f8b-4e5e-9d6e-1d7b216b09da',
   });
   await Mascota.create({
     nombre: 'Pototo',
@@ -77,8 +87,8 @@ async function loadMascota() {
     is_adoptable: 1,
     descripcion: 'Es juguetona',
     sexo: 'M',
-    ubicacion: 'EXTERNO',
-    tipo_mascota: 'gato',
+    ubicacion: 'Externo',
+    tipo_mascota: 'Gato',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pantera.jpg?alt=media&token=ac4c584d-bc50-49ad-ac3f-826d02225cf8',
   });
@@ -92,8 +102,8 @@ async function loadMascota() {
     is_adoptable: 1,
     descripcion: 'Es muy jugueton',
     sexo: 'M',
-    ubicacion: 'REFUGIO',
-    tipo_mascota: 'perro',
+    ubicacion: 'Refugio',
+    tipo_mascota: 'Perro',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/husky-siberiano-bosque.jpg?alt=media&token=ad47cd95-ab9a-4150-aab2-ff3b37a2648f',
   });
@@ -108,8 +118,8 @@ async function loadMascota() {
     descripcion: 'Es cazador y muy jugueton',
     sexo: 'M',
     fecha_adopcion: '2019-01-01',
-    ubicacion: 'REFUGIO',
-    tipo_mascota: 'gato',
+    ubicacion: 'Refugio',
+    tipo_mascota: 'Gato',
     imagen_url:
       'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/teito.jpg?alt=media&token=1d2d830d-9962-4f99-ac7f-7616d76ec91a',
   });
@@ -164,11 +174,99 @@ async function loadUsuario() {
     estado: 'A',
     id_rol: 1,
   });
+
+  let contraAndreina = '12345andreina';
+  contraAndreina = crypto.createHash('sha256').update(contraJoha).digest('base64');
+  await Usuario.create({
+    nombre: 'Andreina',
+    apellido: 'Bravo Lino',
+    usuario: 'Andreina',
+    correo: 'anmabrav@espol.edu.ec',
+    contrasena: contraAndreina,
+    fecha_nacimiento: '1998-07-24',
+    sexo: 'F',
+    is_est_espol: 1,
+    estado: 'A',
+    id_rol: 2,
+  });
 }
 
 async function loadRol() {
   await Rol.create({ nombre: 'Admin', estado: 'A' });
   await Rol.create({ nombre: 'Voluntario', estado: 'A' });
+}
+async function loadReporteAsistencia() {
+  await ReporteAsistencia.create({
+    comida: 'Un cuarto',
+    mapa: '1-1-1-1-1-1-1-1-1-1-1-1-1-1',
+    id_usuario: 1,
+  });
+  await ReporteAsistencia.create({
+    comida: 'Un medio',
+    anomalia: 'Se registro comida fuera de los puntos de comida',
+    mapa: '1-1-1-1-1-1-1-1-1-1-1-1-1-1',
+    id_usuario: 2,
+  });
+}
+
+async function loadFormularioAdopcion() {
+  await FormularioAdopcion.create({
+    cedula: '0951852001',
+    nombre: 'Allison',
+    apellido: 'Brito',
+    ciudad: 'gye',
+    fecha_nacimiento: '08/11/1994',
+    correo: 'adbrito@espol.edu.ec',
+    fecha: '16/07/2021',
+    direccion: 'fco de marcos',
+    motivo: 'motivo',
+    ubicacion: 'refugio',
+    estado: 'PENDIENTE',
+    estado_civil: 'Soltera',
+    numero_mascotas: 1,
+    contacto_referencia: '0993347678',
+    usuario_fb: 'allibritom',
+    usuario_instagram: 'allibrito1',
+    is_tiene_mascotas: true,
+    otras_mascotas: 'gato',
+    is_mascotas_esterilizadas: true,
+    is_tenia_antes_mascotas: true,
+    situacion_mascotas_anteriores: 'sin informacion',
+    is_visitas_periodicas: true,
+    is_convivencia_ninos: true,
+    is_asmatico: true,
+    tipo_domicilio: null,
+    vision_adoptado: null,
+    is_espacio_suficiente: true,
+    donde_dormir_mascotas: null,
+    tiempo_solo: null,
+    medidas_tomaria: null,
+    is_esterilizaria_adoptado: true,
+    motivo_esterilizaria_adoptado: null,
+    situacion_inesperada_cambios: null,
+    id_mascota: 1,
+  });
+}
+
+async function loadPublicacion() {
+  await Publicacion.create({
+    titulo: 'noticia 2',
+    imagen: 'la imagen',
+    descripcion: 'esto es una descripcion',
+    tipo_publicacion: 'noticia',
+    tag: 'perros',
+    fecha: '2021-2-3',
+    id_usuario: 1,
+  });
+  await Publicacion.create({
+    titulo: 'noticia 3',
+    imagen: 'la imagen',
+    descripcion: 'esto es una descripcion',
+    tipo_publicacion: 'evento',
+    tag: 'bingo',
+    fecha: '2021-2-3',
+    id_usuario: 1,
+  });
 }
 
 module.exports = { loaddb };

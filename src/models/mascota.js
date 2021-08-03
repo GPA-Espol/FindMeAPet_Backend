@@ -1,5 +1,10 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../database");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../database');
+
+/**
+ *Class in charge to represent the table of mascota in database
+ * @category Models
+ */
 class Mascota extends Model {}
 Mascota.init(
   {
@@ -41,13 +46,13 @@ Mascota.init(
       type: DataTypes.STRING(400),
       allowNull: false,
     },
-    tipo_mascota:{
+    tipo_mascota: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
     imagen_url: DataTypes.STRING(400),
   },
-  { sequelize, modelName: "mascota" }
+  { underscored: true, sequelize, modelName: 'mascota', timestamps: false }
 );
 
 module.exports = Mascota;

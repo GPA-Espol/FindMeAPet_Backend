@@ -1,5 +1,14 @@
 const Mascota = require('../models/mascota');
+/**
+ * Mascota controller
+ * @module MascotaControllers
+ */
 
+/**
+ * Receive an HTTP request to get all the available pets on the database and response this informmation on the body of the HTTP response
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
+ */
 exports.getMascotas = async (req, res) => {
   const data = await Mascota.findAll({
     attributes: [
@@ -22,9 +31,13 @@ exports.getMascotas = async (req, res) => {
 
   res.status(200).json(data);
 };
-exports.createMascota = async (req, res) => {
-  console.log(req.body);
 
+/**
+ * Receive an HTTP request to create a pet on the database
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 201 is succesfully, Otherwise 400
+ */
+exports.createMascota = async (req, res) => {
   const {
     nombre,
     fecha_nacimiento,
@@ -57,7 +70,7 @@ exports.createMascota = async (req, res) => {
     res.status(400).json('Debe llenar todos los campos');
     return;
   }
-  await Mascota.create({
+  const mascota = await Mascota.create({
     nombre: nombre,
     fecha_nacimiento: fecha_nacimiento,
     color: color,
@@ -72,11 +85,15 @@ exports.createMascota = async (req, res) => {
     tipo_mascota: tipo_mascota,
     imagen_url: imagen_url,
   }).then((user) => {
-    res.status(201).json('Mascota creada');
+    res.status(201).json(req.body);
   });
-  console.log(req.body.edad);
 };
 
+/**
+ * Receive an HTTP request to update a pet on the database
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
+ */
 exports.updateMascotaById = async (req, res) => {
   try {
     let body = req.body;
@@ -90,8 +107,13 @@ exports.updateMascotaById = async (req, res) => {
     res.status(400).json('Error en la actualizacion');
   }
 };
+/**
+ * Receive an HTTP request to get an specific pet on the database and response this informmation on the body of the HTTP response
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
+ */
 exports.getMascotaById = async (req, res) => {
-  const data = await Mascota.findAll({
+  const data = await Mascota.findOne({
     where: {
       id: req.params.mascotaId,
     },
@@ -99,15 +121,22 @@ exports.getMascotaById = async (req, res) => {
 
   res.status(200).json(data);
 };
+
+/**
+ * Receive an HTTP request to delete an specific pet on the database and response this informmation on the body of the HTTP response
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 204 is succesfully, Otherwise 404
+ */
 exports.deleteMascotaById = async (req, res) => {
   try {
-    const data = await Mascota.destroy({
+    await Mascota.destroy({
       where: {
         id: req.params.mascotaId,
       },
     });
-    res.status(200).json('ok');
-  } catch (error) {
-    res.status(400).json('Error al eliminar');
+    res.status(204).send();
+  } catch {
+    res.status(404);
+    res.send({ error: 'No existe la mascota' });
   }
 };
