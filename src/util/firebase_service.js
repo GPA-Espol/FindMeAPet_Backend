@@ -9,15 +9,14 @@ exports.setup = () => {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
-  this.sendNotification();
 };
 
 /**
  * Method to send a notification to the specified device Id
  * @param {string} deviceId id of the device
- * @param {{title: string, body:string}} notificacion data of the notification that will be
+ * @param {{title: string, body: string}} notification data of the notification that will be
  * displayed on the device,
- * @param {{notifType: number, ...}} data The data of the notification
+ * @param {{notifType: string}} data The data of the notification
  */
 exports.sendNotification = (deviceId, notification, data) => {
   const message = { notification, data };
