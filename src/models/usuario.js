@@ -51,6 +51,9 @@ Usuario.init(
     imagen_url: {
       type: DataTypes.STRING(400),
     },
+    device_id: {
+      type: DataTypes.STRING(255),
+    },
     estado: {
       type: DataTypes.CHAR,
       allowNull: false,

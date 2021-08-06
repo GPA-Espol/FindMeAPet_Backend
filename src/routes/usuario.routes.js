@@ -10,6 +10,7 @@ routers.post('/', authAdmin, usuarioController.createUsuario);
 routers.get('/', usuarioController.getUsuarios);
 routers.get('/:usuarioId', usuarioController.getUsuarioById);
 routers.put('/:usuarioId', authAdmin, usuarioController.updateUsuarioById);
+routers.delete('/device', auth, usuarioController.deleteUserDevice);
 routers.delete('/:usuarioId', authAdmin, usuarioController.deleteUsuarioById);
 
 module.exports = routers;
