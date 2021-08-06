@@ -25,7 +25,7 @@ function createServer() {
   app.use('/auth', authRoutes);
   app.use('/publicacion', publicacionRoutes);
   app.use('/form_adopcion', formAdopRoutes);
-
+  app.use('/usuario', usuarioRoutes);
   app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.json({ error: err });
