@@ -6,7 +6,7 @@ const authRoutes = require('./routes/auth.routes');
 const usuarioRoutes = require('./routes/usuario.routes');
 const formAdopRoutes = require('./routes/formularioAdopcion.routes');
 const publicacionRoutes = require('./routes/publicacion.routes');
-
+const solicitudMascotaRoutes = require('./routes/solicitudActMascota.routes');
 let cors = require('cors');
 const port = process.env.PORT || 3000;
 
@@ -25,6 +25,7 @@ function createServer() {
   app.use('/auth', authRoutes);
   app.use('/publicacion', publicacionRoutes);
   app.use('/form_adopcion', formAdopRoutes);
+  app.use('/solicitud', solicitudMascotaRoutes);
   app.use('/usuario', usuarioRoutes);
   app.use(function (err, req, res, next) {
     res.status(err.status || 500);
