@@ -22,39 +22,43 @@ SolicitudActualizacionMascota.init(
     },
     nombre: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
     fecha_nacimiento: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
     },
-    color: DataTypes.STRING(50),
-    is_esterilizado: DataTypes.BOOLEAN,
+    color: { type: DataTypes.STRING(50), allowNull: true },
+    is_esterilizado: { type: DataTypes.BOOLEAN, allowNull: true },
     is_adoptado: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     is_caso_externo: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     is_adoptable: {
       type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    estado: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    descripcion: DataTypes.STRING(400),
+    descripcion: { type: DataTypes.STRING(400), allowNull: true },
     sexo: {
       type: DataTypes.CHAR,
-      allowNull: false,
+      allowNull: true,
     },
     fecha_adopcion: DataTypes.DATEONLY,
     ubicacion: {
       type: DataTypes.STRING(400),
-      allowNull: false,
+      allowNull: true,
     },
     tipo_mascota: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
   },
   { underscored: true, sequelize, modelName: 'solicitudActMascota', timestamps: false }
