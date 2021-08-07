@@ -3,6 +3,9 @@ require('./database');
 const sequelize = require('./database');
 const sampledb = require('../scriptdb');
 const app = createServer();
+const firebase = require('./util/firebase_service');
+
+firebase.setup();
 
 app
   .get('/', function (request, response) {

@@ -51,17 +51,12 @@ Usuario.init(
     imagen_url: {
       type: DataTypes.STRING(400),
     },
+    device_id: {
+      type: DataTypes.STRING(255),
+    },
     estado: {
       type: DataTypes.CHAR,
       allowNull: false,
-    },
-    id_rol: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'rols',
-        key: 'id',
-      },
     },
   },
   { underscored: true, sequelize, modelName: 'usuario', timestamps: false }

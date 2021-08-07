@@ -100,6 +100,7 @@ exports.updateUsuarioById = async (req, res) => {
     res.status(400).json('Error en la actualizacion');
   }
 };
+
 /**
  * Receive an HTTP request to get an specific user on the database and response this informmation on the body of the HTTP response
  * @param {HTTP} req - HTTP request
@@ -132,4 +133,14 @@ exports.deleteUsuarioById = async (req, res) => {
     res.status(404);
     res.send({ error: 'No existe el usuario' });
   }
+};
+
+exports.deleteUserDevice = async (req, res) => {
+  const { id } = req.user;
+  Usuario.update({ device_id: null }, { where: { id } });
+  res.status(200).send();
+};
+
+exports.updateDeviceId = async (userId, deviceId) => {
+  await Usuario.update({ device_id: deviceId }, { where: { id: userId } });
 };

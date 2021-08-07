@@ -1,5 +1,7 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+
+const userController = require('./usuario.controllers');
 /**
  * Auth controller
  * @module AuthControllers
@@ -23,6 +25,7 @@ exports.login = async (req, res, next) => {
         const usuario = { rol: user.rol.nombre, id: user.id };
         const secretKey = process.env.JWT_SECRET_KEY_FMAP || 'test_key';
         const token = jwt.sign({ usuario }, secretKey);
+        await userController.updateDeviceId(user.id, req.body.id_device);
         return res.status(200).json({ token, rol: usuario.rol, id: usuario.id });
       });
     } catch (error) {

@@ -3,6 +3,8 @@ module.exports = {
     username: 'root',
     password: 'root',
     database: 'database_dev',
+    // password: 'root1234',
+    // database: 'proyecto_gpa',
     host: '127.0.0.1',
     dialect: 'mysql',
   },
