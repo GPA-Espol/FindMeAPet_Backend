@@ -1,4 +1,5 @@
 const FormularioAdopcion = require('../models/formularioAdopcion');
+const tipoEstado = require('../util/tipo_estado');
 /**
  * FormularioAdopcion controller
  * @module FormularioAdopcionControllers
@@ -9,228 +10,158 @@ const FormularioAdopcion = require('../models/formularioAdopcion');
  * @param {HTTP} rep - HTTP response status 201 is succesfully, Otherwise 400
  */
 exports.createAdopteForm = async (req, res) => {
+  /*Campos default id_administrador,estado,fecha */
+  console.log(req);
+
   let {
-    cedula,
+    //obligatorios
     nombre,
     apellido,
-    ciudad,
     fecha_nacimiento,
-    correo,
-    fecha,
-    direccion,
-    motivo,
-    ubicacion,
     estado_civil,
-    numero_mascotas,
-    contacto_referencia,
+    telefono_fijo,
+    movil,
+    provincia,
+    ciudad,
+    direccion_domicilio,
+    correo_electronico,
+    id_mascota,
+    como_conocio_gpa,
+    num_ninos,
+    num_adultos,
+    familia_acepta,
+    familia_alergica,
+    compromiso_esterilizacion,
+    tipo_vivienda,
+    is_alquilada,
+    is_tiene_mascotas,
+    dos_contacto_referencia,
+    planilla,
+    //no obligatorios
+    dueno_acepta,
+    descripcion_mascotas,
     usuario_fb,
     usuario_instagram,
-    is_tiene_mascotas,
-    otras_mascotas,
-    is_mascotas_esterilizadas,
-    is_tenia_antes_mascotas,
-    situacion_mascotas_anteriores,
-    is_visitas_periodicas,
-    is_convivencia_ninos,
-    is_asmatico,
-    tipo_domicilio,
-    vision_adoptado,
-    is_espacio_suficiente,
-    donde_dormir_mascotas,
-    tiempo_solo,
-    medidas_tomaria,
-    is_esterilizaria_adoptado,
-    motivo_esterilizaria_adoptado,
-    situacion_inesperada_cambios,
-    id_mascota,
   } = req.body;
-  if (
-    cedula === undefined ||
-    nombre === undefined ||
-    apellido === undefined ||
-    ciudad === undefined ||
-    fecha_nacimiento == undefined ||
-    correo === undefined ||
-    fecha === undefined ||
-    direccion === undefined ||
-    motivo === undefined ||
-    ubicacion === undefined ||
-    estado_civil === undefined ||
-    numero_mascotas === undefined ||
-    contacto_referencia === undefined ||
-    usuario_fb === undefined ||
-    usuario_instagram === undefined ||
-    is_tiene_mascotas === undefined ||
-    otras_mascotas === undefined ||
-    is_mascotas_esterilizadas === undefined ||
-    is_tenia_antes_mascotas === undefined ||
-    situacion_mascotas_anteriores === undefined ||
-    is_visitas_periodicas === undefined ||
-    is_convivencia_ninos === undefined ||
-    is_asmatico === undefined ||
-    tipo_domicilio === undefined ||
-    vision_adoptado === undefined ||
-    is_espacio_suficiente === undefined ||
-    donde_dormir_mascotas === undefined ||
-    tiempo_solo === undefined ||
-    medidas_tomaria === undefined ||
-    is_esterilizaria_adoptado === undefined ||
-    motivo_esterilizaria_adoptado === undefined ||
-    situacion_inesperada_cambios === undefined ||
-    id_mascota == undefined
-  ) {
-    res.status(400).json('Faltan campos en su request');
-    return;
+  if (nombre === undefined || nombre === '') {
+    return res.status(400).json('El campo nombre es obligatorio');
   }
-  if (cedula === '') {
-    res.json('Debe ingresar la cedula');
-    return;
+  if (apellido === '' || apellido === undefined) {
+    return res.json('El campo apellido es obligatorio');
   }
-  if (nombre === '') {
-    res.json('Debe ingresar el nombre');
-    return;
+  if (fecha_nacimiento === '' || fecha_nacimiento === undefined) {
+    return res.json('El campo fecha de nacimiento es obligatorio');
   }
-  if (apellido === '') {
-    res.json('Debe ingresar el apellido');
-    return;
+  if (estado_civil === '' || estado_civil === undefined) {
+    return res.json('El campo estado civil es obligatorio');
   }
-  if (ciudad === '') {
-    res.json('Debe ingresar la ciudad');
-    return;
+  if (telefono_fijo === '' || telefono_fijo === undefined) {
+    return res.json('El campo telefono fijo es obligatorio');
   }
-  if (fecha_nacimiento === '') {
-    res.json('Debe ingresar la fecha de nacimiento');
-    return;
+  if (movil === '' || movil === undefined) {
+    return res.json('El campo movil es obligatorio');
   }
-  if (correo === '') {
-    res.json('Debe ingresar un correo');
-    return;
+  if (provincia === '' || provincia === undefined) {
+    return res.json('El campo provincia es obligatorio');
   }
-  if (fecha === '') {
-    res.json('Debe ingresar la fecha');
-    return;
+  if (ciudad === '' || ciudad === undefined) {
+    return res.json('El campo ciudad es obligatorio');
   }
-  if (direccion === '') {
-    res.json('Debe ingresar la direccion');
-    return;
+  if (direccion_domicilio === '' || direccion_domicilio === undefined) {
+    return res.json('El campo direccion de domicilio es obligatorio');
   }
-  if (motivo === '') {
-    res.json('Debe ingresar el motivo');
-    return;
+  if (correo_electronico === '' || correo_electronico === undefined) {
+    return res.json('El campo correo electronico es obligatorio');
   }
-  if (ubicacion === '') {
-    res.json('Debe ingresar la ubicacion');
-    return;
+  if (id_mascota === '' || id_mascota === undefined) {
+    return res.json('Debe seleccionar una mascota');
   }
-  if (estado_civil === '') {
-    estado_civil = null;
+  if (como_conocio_gpa === '' || como_conocio_gpa === undefined) {
+    return res.json('El campo como_conocio_gpa es obligatorio');
   }
-  if (numero_mascotas === '') {
-    numero_mascotas = null;
+  if (num_ninos === '' || num_ninos === undefined) {
+    return res.json('El campo num_ninos es obligatorio');
   }
-  if (contacto_referencia === '') {
-    contacto_referencia = null;
+  if (num_adultos === '' || num_adultos === undefined) {
+    return res.json('El campo num_adultos es obligatorio');
   }
+  if (familia_acepta === '' || familia_acepta === undefined) {
+    return res.json('El campo familia_acepta es obligatorio');
+  }
+  if (familia_alergica === '' || familia_alergica === undefined) {
+    return res.json('El campo familia_alergica es obligatorio');
+  }
+  if (compromiso_esterilizacion === '' || compromiso_esterilizacion === undefined) {
+    return res.json('El campo compromiso_esterilizacion es obligatorio');
+  }
+  if (tipo_vivienda === '' || tipo_vivienda === undefined) {
+    return res.json('El campo tipo_vivienda es obligatorio');
+  }
+  if (is_alquilada === '' || is_alquilada === undefined) {
+    return res.json('El campo is_alquilada es obligatorio');
+  }
+  if (is_tiene_mascotas === '' || is_tiene_mascotas === undefined) {
+    return res.json('El campo is_tiene_mascotas es obligatorio');
+  }
+  if (dos_contacto_referencia === '' || dos_contacto_referencia === undefined) {
+    return res.json('El campo dos_contacto_referencia es obligatorio');
+  }
+  if (planilla === '' || planilla === undefined) {
+    return res.json('El campo planilla es obligatorio');
+  }
+
   if (usuario_fb === '') {
     usuario_fb = null;
   }
   if (usuario_instagram === '') {
     usuario_instagram = null;
   }
-  if (is_tiene_mascotas === '') {
-    is_tiene_mascotas = null;
+  if (descripcion_mascotas === '') {
+    descripcion_mascotas = null;
   }
-  if (otras_mascotas === '') {
-    otras_mascotas = null;
+  if (dueno_acepta === '') {
+    dueno_acepta = null;
   }
-  if (is_mascotas_esterilizadas === '') {
-    is_mascotas_esterilizadas = null;
-  }
-  if (is_tenia_antes_mascotas === '') {
-    is_tenia_antes_mascotas = null;
-  }
-  if (situacion_mascotas_anteriores === '') {
-    situacion_mascotas_anteriores = null;
-  }
-  if (is_visitas_periodicas === '') {
-    is_visitas_periodicas = null;
-  }
-  if (is_convivencia_ninos === '') {
-    is_convivencia_ninos = null;
-  }
-  if (is_asmatico === '') {
-    is_asmatico = null;
-  }
-  if (tipo_domicilio === '') {
-    tipo_domicilio = null;
-  }
-  if (vision_adoptado === '') {
-    vision_adoptado = null;
-  }
-  if (is_espacio_suficiente === '') {
-    is_espacio_suficiente = null;
-  }
-  if (donde_dormir_mascotas === '') {
-    donde_dormir_mascotas = null;
-  }
-  if (tiempo_solo === '') {
-    tiempo_solo = null;
-  }
-  if (medidas_tomaria === '') {
-    medidas_tomaria = null;
-  }
-  if (is_esterilizaria_adoptado === '') {
-    is_esterilizaria_adoptado = null;
-  }
-  if (motivo_esterilizaria_adoptado === '') {
-    motivo_esterilizaria_adoptado = null;
-  }
-  if (situacion_inesperada_cambios === '') {
-    situacion_inesperada_cambios = null;
-  }
-  if (id_mascota == '') {
-    res.json('Debe seleccionar una mascota');
-    return;
-  }
-
+  let fecha = new Date().format('YYYY-MM-DD HH:MM:SS');
   const formulario = {
-    cedula: cedula,
+    estado: tipoEstado.tipoEstado.PENDIENTE,
+    fecha: fecha,
+    //obligatorios
     nombre: nombre,
     apellido: apellido,
-    ciudad: ciudad,
     fecha_nacimiento: fecha_nacimiento,
-    correo: correo,
-    fecha: fecha,
-    direccion: direccion,
-    motivo: motivo,
-    ubicacion: ubicacion,
     estado_civil: estado_civil,
-    estado: 'PENDIENTE',
-    numero_mascotas: numero_mascotas,
-    contacto_referencia: contacto_referencia,
+    telefono_fijo: telefono_fijo,
+    movil: movil,
+    provincia: provincia,
+    ciudad: ciudad,
+    direccion_domicilio: direccion_domicilio,
+    correo_electronico: correo_electronico,
+    id_mascota: id_mascota,
+    como_conocio_gpa: como_conocio_gpa,
+    num_ninos: num_ninos,
+    num_adultos: num_adultos,
+    familia_acepta: familia_acepta,
+    familia_alergica: familia_alergica,
+    compromiso_esterilizacion: compromiso_esterilizacion,
+    tipo_vivienda: tipo_vivienda,
+    is_alquilada: is_alquilada,
+    is_tiene_mascotas: is_tiene_mascotas,
+    dos_contacto_referencia: dos_contacto_referencia,
+    planilla: planilla,
+    //no obligatorios
+    dueno_acepta: dueno_acepta,
+    descripcion_mascotas: descripcion_mascotas,
     usuario_fb: usuario_fb,
     usuario_instagram: usuario_instagram,
-    is_tiene_mascotas: is_tiene_mascotas,
-    otras_mascotas: otras_mascotas,
-    is_mascotas_esterilizadas: is_mascotas_esterilizadas,
-    is_tenia_antes_mascotas: is_tenia_antes_mascotas,
-    situacion_mascotas_anteriores: situacion_mascotas_anteriores,
-    is_visitas_periodicas: is_visitas_periodicas,
-    is_convivencia_ninos: is_convivencia_ninos,
-    is_asmatico: is_asmatico,
-    tipo_domicilio: tipo_domicilio,
-    vision_adoptado: vision_adoptado,
-    is_espacio_suficiente: is_espacio_suficiente,
-    donde_dormir_mascotas: donde_dormir_mascotas,
-    tiempo_solo: tiempo_solo,
-    medidas_tomaria: medidas_tomaria,
-    is_esterilizaria_adoptado: is_esterilizaria_adoptado,
-    motivo_esterilizaria_adoptado: motivo_esterilizaria_adoptado,
-    situacion_inesperada_cambios: situacion_inesperada_cambios,
-    id_mascota: id_mascota,
   };
-  console.log(formulario);
-  await FormularioAdopcion.create(formulario).then((form) => {
-    res.status(201).json('Formulario enviado');
-  });
+  await FormularioAdopcion.create(formulario)
+    .then((form) => {
+      return res.status(201).json('Formulario enviado');
+    })
+    .catch((error) => {
+      return res.status(error.status).json({ error });
+    });
 };
+
+exports.editStatus = async (req, res) => {};

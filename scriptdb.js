@@ -11,8 +11,8 @@ async function loaddb() {
   await loadRol();
   await loadUsuario();
   await loadReporteAsistencia();
-  await loadFormularioAdopcion();
-  //await loadPublicacion();
+  // await loadFormularioAdopcion();
+  await loadPublicacion();
 }
 
 async function loadMascota() {
@@ -211,40 +211,33 @@ async function loadReporteAsistencia() {
 
 async function loadFormularioAdopcion() {
   await FormularioAdopcion.create({
-    cedula: '0951852001',
     nombre: 'Allison',
     apellido: 'Brito',
-    ciudad: 'gye',
     fecha_nacimiento: '08/11/1994',
-    correo: 'adbrito@espol.edu.ec',
-    fecha: '16/07/2021',
-    direccion: 'fco de marcos',
-    motivo: 'motivo',
-    ubicacion: 'refugio',
-    estado: 'PENDIENTE',
     estado_civil: 'Soltera',
-    numero_mascotas: 1,
-    contacto_referencia: '0993347678',
-    usuario_fb: 'allibritom',
-    usuario_instagram: 'allibrito1',
-    is_tiene_mascotas: true,
-    otras_mascotas: 'gato',
-    is_mascotas_esterilizadas: true,
-    is_tenia_antes_mascotas: true,
-    situacion_mascotas_anteriores: 'sin informacion',
-    is_visitas_periodicas: true,
-    is_convivencia_ninos: true,
-    is_asmatico: true,
-    tipo_domicilio: null,
-    vision_adoptado: null,
-    is_espacio_suficiente: true,
-    donde_dormir_mascotas: null,
-    tiempo_solo: null,
-    medidas_tomaria: null,
-    is_esterilizaria_adoptado: true,
-    motivo_esterilizaria_adoptado: null,
-    situacion_inesperada_cambios: null,
-    id_mascota: 1,
+    telefono_fijo: '5035408',
+    movil: '0991279378',
+    provincia: 'Guayas',
+    ciudad: 'Guayaquil',
+    direccion_domicilio: 'Fco de Marcos',
+    correo_electronico: 'adbrito@espol.edu.ec',
+    id_mascota: 2,
+    como_conocio_gpa: 'Fb',
+    num_ninos: 2,
+    num_adultos: 1,
+    familia_acepta: true,
+    familia_alergica: true,
+    compromiso_esterilizacion: true,
+    tipo_vivienda: 'arrendada',
+    is_alquilada: false,
+    is_tiene_mascotas: false,
+    dos_contacto_referencia: 'na',
+    planilla: 'hola',
+    //no obligatorios
+    dueno_acepta: '',
+    descripcion_mascotas: '',
+    usuario_fb: '',
+    usuario_instagram: '',
   });
 }
 

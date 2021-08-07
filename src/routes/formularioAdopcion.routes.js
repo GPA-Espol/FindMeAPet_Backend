@@ -6,6 +6,7 @@ const passport = require('passport');
 const auth = passport.authenticate('jwt', { session: false });
 const authAdmin = passport.authenticate('jwt-admin', { session: false });
 
-routers.post('/', authAdmin, formularioAdopcionController.createAdopteForm);
+routers.post('/', formularioAdopcionController.createAdopteForm);
+routers.put('/status', authAdmin, formularioAdopcionController.editStatus);
 
 module.exports = routers;
