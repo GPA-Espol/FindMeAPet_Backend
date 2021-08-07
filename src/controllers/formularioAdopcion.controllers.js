@@ -1,5 +1,7 @@
 const FormularioAdopcion = require('../models/formularioAdopcion');
 const tipoEstado = require('../util/tipo_estado');
+const moment = require('moment');
+
 /**
  * FormularioAdopcion controller
  * @module FormularioAdopcionControllers
@@ -11,8 +13,6 @@ const tipoEstado = require('../util/tipo_estado');
  */
 exports.createAdopteForm = async (req, res) => {
   /*Campos default id_administrador,estado,fecha */
-  console.log(req);
-
   let {
     //obligatorios
     nombre,
@@ -122,10 +122,12 @@ exports.createAdopteForm = async (req, res) => {
   if (dueno_acepta === '') {
     dueno_acepta = null;
   }
-  let fecha = new Date().format('YYYY-MM-DD HH:MM:SS');
+  let fecha = new Date();
+
+  const momentDate = moment(fecha.toLocaleDateString());
   const formulario = {
     estado: tipoEstado.tipoEstado.PENDIENTE,
-    fecha: fecha,
+    fecha: momentDate,
     //obligatorios
     nombre: nombre,
     apellido: apellido,
