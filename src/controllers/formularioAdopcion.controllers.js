@@ -1,6 +1,5 @@
 const FormularioAdopcion = require('../models/formularioAdopcion');
-const tipoEstado = require('../util/tipo_estado');
-const moment = require('moment');
+const tipoEstado = require('../util/enum.model');
 
 /**
  * FormularioAdopcion controller
@@ -124,7 +123,12 @@ exports.createAdopteForm = async (req, res) => {
   }
   let fecha = new Date();
 
-  const momentDate = moment(fecha.toLocaleDateString());
+  const momentDate =
+    fecha.getFullYear() +
+    '/' +
+    (fecha.getMonth() > 8 ? fecha.getMonth() + 1 : '0' + (fecha.getMonth() + 1)) +
+    '/' +
+    (fecha.getDate() > 9 ? fecha.getDate() : '0' + fecha.getDate());
   const formulario = {
     estado: tipoEstado.tipoEstado.PENDIENTE,
     fecha: momentDate,
