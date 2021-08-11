@@ -1,6 +1,6 @@
 exports.RolUsuario = {
-  VOLUNTARIO: 'Voluntario',
-  ADMIN: 'Admin',
+  VOLUNTARIO: 2,
+  ADMIN: 1,
 };
 
 exports.RolVoluntario = {

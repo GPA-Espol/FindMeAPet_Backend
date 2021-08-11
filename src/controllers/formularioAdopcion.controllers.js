@@ -1,7 +1,7 @@
 const FormularioAdopcion = require('../models/formularioAdopcion');
 const Usuario = require('../models/usuario');
 
-const tipoEstado = require('../util/enum.model');
+const enums = require('../util/enum.model');
 const { sendNotification } = require('../util/firebase_service');
 const { tipoNotificacion } = require('../util/tipo_notificacion');
 
@@ -179,7 +179,7 @@ exports.createAdopteForm = async (req, res) => {
     '/' +
     (fecha.getDate() > 9 ? fecha.getDate() : '0' + fecha.getDate());
   const formulario = {
-    estado: tipoEstado.tipoEstado.PENDIENTE,
+    estado: enums.tipoEstado.PENDIENTE,
     fecha: momentDate,
     //obligatorios
     nombre: nombre,
@@ -221,14 +221,21 @@ exports.createAdopteForm = async (req, res) => {
     });
 };
 async function enviarNotificacion() {
-  notificacion = { title: '¡Nuevo Formulario Adopción!', body: null };
+  notificacion = { title: '¡Nuevo Formulario Adopción!', body: '' };
   data = { notifType: tipoNotificacion.ADOPT_PET_REQUEST };
 
   const usuarios = await Usuario.findAll({
-    attributes: ['device_id'],
+    where: {
+      id_rol: enums.RolUsuario.ADMIN,
+    },
+    attributes: ['usuario', 'device_id'],
   });
+  let device_id;
   for (usuario of usuarios) {
-    sendNotification(usuario['device_id'], notificacion, data);
+    device_id = usuario['dataValues']['device_id'];
+    if (device_id != null) {
+      sendNotification(device_id, notificacion, data);
+    }
   }
 }
 exports.editStatus = async (req, res) => {};
