@@ -1,5 +1,9 @@
 const FormularioAdopcion = require('../models/formularioAdopcion');
+const Usuario = require('../models/usuario');
+
 const tipoEstado = require('../util/enum.model');
+const { sendNotification } = require('../util/firebase_service');
+const { tipoNotificacion } = require('../util/tipo_notificacion');
 
 /**
  * FormularioAdopcion controller
@@ -7,7 +11,7 @@ const tipoEstado = require('../util/enum.model');
  */
 
 /**
- * Receive an HTTP request to get all the available pets on the database and response this informmation on the body of the HTTP response
+ * Receive an HTTP request to get all the adoption forms on the database and response this informmation on the body of the HTTP response
  * @param {HTTP} req - HTTP request
  * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
  */
@@ -208,11 +212,23 @@ exports.createAdopteForm = async (req, res) => {
   };
   await FormularioAdopcion.create(formulario)
     .then((form) => {
+      enviarNotificacion();
+
       return res.status(201).json('Formulario enviado');
     })
     .catch((error) => {
       return res.status(error.status).json({ error });
     });
 };
+async function enviarNotificacion() {
+  notificacion = { title: '¡Nuevo Formulario Adopción!', body: null };
+  data = { notifType: tipoNotificacion.ADOPT_PET_REQUEST };
 
+  const usuarios = await Usuario.findAll({
+    attributes: ['device_id'],
+  });
+  for (usuario of usuarios) {
+    sendNotification(usuario['device_id'], notificacion, data);
+  }
+}
 exports.editStatus = async (req, res) => {};
