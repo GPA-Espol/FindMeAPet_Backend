@@ -1,5 +1,9 @@
 const FormularioAdopcion = require('../models/formularioAdopcion');
-const tipoEstado = require('../util/enum.model');
+const Usuario = require('../models/usuario');
+
+const enums = require('../util/enum.model');
+const { sendNotification } = require('../util/firebase_service');
+const { tipoNotificacion } = require('../util/tipo_notificacion');
 
 /**
  * FormularioAdopcion controller
@@ -7,7 +11,7 @@ const tipoEstado = require('../util/enum.model');
  */
 
 /**
- * Receive an HTTP request to get all the available pets on the database and response this informmation on the body of the HTTP response
+ * Receive an HTTP request to get all the adoption forms on the database and response this informmation on the body of the HTTP response
  * @param {HTTP} req - HTTP request
  * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
  */
@@ -175,7 +179,7 @@ exports.createAdopteForm = async (req, res) => {
     '/' +
     (fecha.getDate() > 9 ? fecha.getDate() : '0' + fecha.getDate());
   const formulario = {
-    estado: tipoEstado.tipoEstado.PENDIENTE,
+    estado: enums.tipoEstado.PENDIENTE,
     fecha: momentDate,
     //obligatorios
     nombre: nombre,
@@ -208,11 +212,30 @@ exports.createAdopteForm = async (req, res) => {
   };
   await FormularioAdopcion.create(formulario)
     .then((form) => {
+      enviarNotificacion();
+
       return res.status(201).json('Formulario enviado');
     })
     .catch((error) => {
       return res.status(error.status).json({ error });
     });
 };
+async function enviarNotificacion() {
+  notificacion = { title: '¡Nuevo Formulario Adopción!', body: '' };
+  data = { notifType: tipoNotificacion.ADOPT_PET_REQUEST };
 
+  const usuarios = await Usuario.findAll({
+    where: {
+      id_rol: enums.RolUsuario.ADMIN,
+    },
+    attributes: ['usuario', 'device_id'],
+  });
+  let device_id;
+  for (usuario of usuarios) {
+    device_id = usuario['dataValues']['device_id'];
+    if (device_id != null) {
+      sendNotification(device_id, notificacion, data);
+    }
+  }
+}
 exports.editStatus = async (req, res) => {};
