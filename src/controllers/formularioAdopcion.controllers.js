@@ -5,6 +5,51 @@ const tipoEstado = require('../util/enum.model');
  * FormularioAdopcion controller
  * @module FormularioAdopcionControllers
  */
+
+/**
+ * Receive an HTTP request to get all the available pets on the database and response this informmation on the body of the HTTP response
+ * @param {HTTP} req - HTTP request
+ * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
+ */
+exports.getFormulariosAdopcion = async (req, res) => {
+  const data = await FormularioAdopcion.findAll({
+    attributes: [
+      'estado',
+      'fecha',
+      //obligatorios
+      'nombre',
+      'apellido',
+      'fecha_nacimiento',
+      'estado_civil',
+      'telefono_fijo',
+      'movil',
+      'provincia',
+      'ciudad',
+      'direccion_domicilio',
+      'correo_electronico',
+      'id_mascota',
+      'como_conocio_gpa',
+      'num_ninos',
+      'num_adultos',
+      'familia_acepta',
+      'familia_alergica',
+      'compromiso_esterilizacion',
+      'tipo_vivienda',
+      'is_alquilada',
+      'is_tiene_mascotas',
+      'dos_contacto_referencia',
+      'planilla',
+      //no obligatorios
+      'dueno_acepta',
+      'descripcion_mascotas',
+      'usuario_fb',
+      'usuario_instagram',
+    ],
+  });
+
+  res.status(200).json(data);
+};
+
 /**
  * Receive an HTTP request to create a adopt form on the database
  * @param {HTTP} req - HTTP request
