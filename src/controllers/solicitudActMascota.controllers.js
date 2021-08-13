@@ -20,6 +20,7 @@ mascotaCampos = {
   ubicacion: null,
   tipo_mascota: null,
   id_mascota: null,
+  imagen_url: null,
 };
 
 /**

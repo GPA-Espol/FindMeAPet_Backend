@@ -60,6 +60,9 @@ SolicitudActualizacionMascota.init(
       type: DataTypes.STRING(50),
       allowNull: true,
     },
+    imagen_url: {
+      type: DataTypes.STRING(400),
+    },
   },
   { underscored: true, sequelize, modelName: 'solicitudActMascota', timestamps: false }
 );
