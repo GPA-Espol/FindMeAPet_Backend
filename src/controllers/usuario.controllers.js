@@ -1,6 +1,7 @@
 const Usuario = require('../models/usuario');
 const crypto = require('crypto');
 const enums = require('../util/enum.model');
+const auth = require('./auth.controllers');
 
 /**
  * Usuario controller
@@ -58,8 +59,8 @@ exports.createUsuario = async (req, res) => {
     sexo,
     is_est_espol,
     imagen_url,
-    estado,
     id_rol,
+    estado,
   } = req.body;
   if (
     usuario === undefined ||
@@ -70,12 +71,24 @@ exports.createUsuario = async (req, res) => {
     fecha_nacimiento == undefined ||
     sexo === undefined ||
     is_est_espol === undefined ||
-    imagen_url === undefined ||
-    estado === undefined ||
-    id_rol === undefined
+    id_rol === undefined ||
+    estado == undefined
   ) {
-    res.status(400).json('Debe llenar todos los campos');
-    return;
+    return res.status(400).json('Debe llenar todos los campos');
+  }
+  const usuarios = await Usuario.findAll({
+    attributes: ['usuario', 'correo'],
+  });
+  let correoBase, usuarioBase;
+  for (user of usuarios) {
+    correoBase = user['dataValues']['correo'];
+    usuarioBase = user['dataValues']['usuario'];
+    if (correo === correoBase) {
+      return res.status(409).json('El correo ya se encuentra registrado ');
+    }
+    if (usuario === usuarioBase) {
+      return res.status(409).json('El nombre de usuario no está disponible');
+    }
   }
 
   const hash = crypto.createHash('sha256').update(contrasena).digest('base64');
@@ -93,11 +106,9 @@ exports.createUsuario = async (req, res) => {
       estado: estado,
       id_rol: id_rol,
     });
-    res.status(201).json({ id: user.id });
+    return res.status(201).json({ id: user.id });
   } catch {
-    res.status(409).json('El usuario ya existe'); //Asumiendo que el unico error que da la base de datos es que el usuario ya exista
-    //En realidad esto se deberia hacer bien, con todas las validaciones de si el un usuario con el username ya existe o si un usuario con ese correo ya existe...
-    //para dar buenos mensajes de errores, pero lo dejo aqui por motivos de tiempo...
+    return res.status(409).json('El usuario ya existe');
   }
 };
 
@@ -108,22 +119,21 @@ exports.createUsuario = async (req, res) => {
  */
 exports.updateUsuarioById = async (req, res) => {
   try {
-    const { body } = req; //Lo mismo acá, es que enserio no puedo creer como no le meten tiempo a un proyecto
-    //tan imprtante como este que vale el 50% de la nota..., todos estos endpoints estan hechos a lo que salga como si el proyecto no importara...
-    //En ninguno de los dos endpoints encriptaban siquiera la contraseña...
+    const { body } = req;
     if (body.contrasena !== undefined && body.contrasena !== '') {
       body.contrasena = crypto.createHash('sha256').update(body.contrasena).digest('base64');
     } else if (body.contrasena === '') {
       delete body.contrasena;
     }
+
     await Usuario.update(body, {
       where: {
         id: req.params.usuarioId,
       },
     });
-    res.status(200).json('Usuario actualizado exitosamente');
+    return res.status(200).json('Usuario actualizado exitosamente');
   } catch (error) {
-    res.status(409).json('Error en la actualizacion');
+    return res.status(409).json('Error en la actualizacion');
   }
 };
 
@@ -136,6 +146,16 @@ exports.getUsuarioById = async (req, res) => {
   const data = await Usuario.findOne({
     where: {
       id: req.params.usuarioId,
+    },
+  });
+
+  return res.status(200).json(data);
+};
+exports.getMyUser = async (req, res) => {
+  console.log(auth.usuario);
+  const data = await Usuario.findOne({
+    where: {
+      id: auth.usuario.id,
     },
   });
 

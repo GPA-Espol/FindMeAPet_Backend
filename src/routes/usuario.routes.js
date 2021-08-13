@@ -8,7 +8,7 @@ const authAdmin = passport.authenticate('jwt-admin', { session: false });
 
 routers.post('/', authAdmin, usuarioController.createUsuario);
 routers.get('/', authAdmin, usuarioController.getUsuarios);
-routers.get('/:usuarioId', usuarioController.getUsuarioById);
+routers.get('/myUser', usuarioController.getMyUser);
 routers.put('/:usuarioId', authAdmin, usuarioController.updateUsuarioById);
 routers.delete('/device', auth, usuarioController.deleteUserDevice);
 routers.delete('/:usuarioId', authAdmin, usuarioController.deleteUsuarioById);
