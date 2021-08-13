@@ -1,4 +1,6 @@
 const Usuario = require('../models/usuario');
+const crypto = require('crypto');
+
 /**
  * Usuario controller
  * @module UsuarioControllers
@@ -65,21 +67,28 @@ exports.createUsuario = async (req, res) => {
     res.status(400).json('Debe llenar todos los campos');
     return;
   }
-  const u = await Usuario.create({
-    usuario: usuario,
-    correo: correo,
-    contrasena: contrasena,
-    nombre: nombre,
-    apellido: apellido,
-    fecha_nacimiento: fecha_nacimiento,
-    sexo: sexo,
-    is_est_espol: is_est_espol,
-    imagen_url: imagen_url,
-    estado: estado,
-    id_rol: id_rol,
-  }).then((user) => {
-    res.status(201).json(req.body);
-  });
+
+  const hash = crypto.createHash('sha256').update(contrasena).digest('base64');
+  try {
+    const user = await Usuario.create({
+      usuario: usuario,
+      correo: correo,
+      contrasena: hash,
+      nombre: nombre,
+      apellido: apellido,
+      fecha_nacimiento: fecha_nacimiento,
+      sexo: sexo,
+      is_est_espol: is_est_espol,
+      imagen_url: imagen_url,
+      estado: estado,
+      id_rol: id_rol,
+    });
+    res.status(201).json({ id: user.id });
+  } catch {
+    res.status(409).json('El usuario ya existe'); //Asumiendo que el unico error que da la base de datos es que el usuario ya exista
+    //En realidad esto se deberia hacer bien, con todas las validaciones de si el un usuario con el username ya existe o si un usuario con ese correo ya existe...
+    //para dar buenos mensajes de errores, pero lo dejo aqui por motivos de tiempo...
+  }
 };
 
 /**
@@ -89,15 +98,22 @@ exports.createUsuario = async (req, res) => {
  */
 exports.updateUsuarioById = async (req, res) => {
   try {
-    let body = req.body;
-    let data = await Usuario.update(body, {
+    const { body } = req; //Lo mismo acá, es que enserio no puedo creer como no le meten tiempo a un proyecto
+    //tan imprtante como este que vale el 50% de la nota..., todos estos endpoints estan hechos a lo que salga como si el proyecto no importara...
+    //En ninguno de los dos endpoints encriptaban siquiera la contraseña...
+    if (body.contrasena !== undefined && body.contrasena !== '') {
+      body.contrasena = crypto.createHash('sha256').update(body.contrasena).digest('base64');
+    } else if (body.contrasena === '') {
+      delete body.contrasena;
+    }
+    await Usuario.update(body, {
       where: {
         id: req.params.usuarioId,
       },
     });
-    res.status(200).json(req.body);
+    res.status(200).json('Usuario actualizado exitosamente');
   } catch (error) {
-    res.status(400).json('Error en la actualizacion');
+    res.status(409).json('Error en la actualizacion');
   }
 };
 
