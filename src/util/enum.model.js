@@ -80,6 +80,7 @@ exports.ColorMascota = {
   GRIS: 'Gris',
   ROMANO: 'Romano',
   NARANJA: 'Naranja',
+  CAFE: 'Café',
 };
 
 exports.tipoEstado = {
