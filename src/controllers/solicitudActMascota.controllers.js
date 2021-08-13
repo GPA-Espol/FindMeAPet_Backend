@@ -45,13 +45,7 @@ exports.createUpdateform = async (req, res) => {
     return res.status(400).json('Debe haber al menos un campo con información');
   }
   const fecha = new Date();
-  solicitudMascota['fecha'] =
-    fecha.getFullYear() +
-    '/' +
-    (fecha.getMonth() > 8 ? fecha.getMonth() + 1 : '0' + (fecha.getMonth() + 1)) +
-    '/' +
-    (fecha.getDate() > 9 ? fecha.getDate() : '0' + fecha.getDate());
-
+  solicitudMascota.fecha = fecha.toISOString().split('T')[0];
   solicitudMascota['id_usuario_voluntario'] = req.user.id;
 
   (solicitudMascota['estado'] = enumModels.tipoEstado.PENDIENTE),
