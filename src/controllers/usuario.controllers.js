@@ -1,7 +1,7 @@
 const Usuario = require('../models/usuario');
+const crypto = require('crypto');
 const enums = require('../util/enum.model');
 const auth = require('./auth.controllers');
-const crypto = require('crypto');
 
 /**
  * Usuario controller
@@ -60,6 +60,7 @@ exports.createUsuario = async (req, res) => {
     is_est_espol,
     imagen_url,
     id_rol,
+    estado,
   } = req.body;
   if (
     usuario === undefined ||
@@ -70,26 +71,45 @@ exports.createUsuario = async (req, res) => {
     fecha_nacimiento == undefined ||
     sexo === undefined ||
     is_est_espol === undefined ||
-    id_rol === undefined
+    id_rol === undefined ||
+    estado == undefined
   ) {
-    res.status(400).json('Debe llenar todos los campos');
-    return;
+    return res.status(400).json('Debe llenar todos los campos');
   }
-  const u = await Usuario.create({
-    usuario: usuario,
-    correo: correo,
-    contrasena: crypto.createHash('sha256').update(contrasena).digest('base64'),
-    nombre: nombre,
-    apellido: apellido,
-    fecha_nacimiento: fecha_nacimiento,
-    sexo: sexo,
-    is_est_espol: is_est_espol,
-    imagen_url: imagen_url,
-    estado: 'A',
-    id_rol: id_rol,
-  }).then((user) => {
-    res.status(201).json(req.body);
+  const usuarios = await Usuario.findAll({
+    attributes: ['usuario', 'correo'],
   });
+  let correoBase, usuarioBase;
+  for (user of usuarios) {
+    correoBase = user['dataValues']['correo'];
+    usuarioBase = user['dataValues']['usuario'];
+    if (correo === correoBase) {
+      return res.status(409).json('El correo ya se encuentra registrado ');
+    }
+    if (usuario === usuarioBase) {
+      return res.status(409).json('El nombre de usuario no está disponible');
+    }
+  }
+
+  const hash = crypto.createHash('sha256').update(contrasena).digest('base64');
+  try {
+    const user = await Usuario.create({
+      usuario: usuario,
+      correo: correo,
+      contrasena: hash,
+      nombre: nombre,
+      apellido: apellido,
+      fecha_nacimiento: fecha_nacimiento,
+      sexo: sexo,
+      is_est_espol: is_est_espol,
+      imagen_url: imagen_url,
+      estado: estado,
+      id_rol: id_rol,
+    });
+    return res.status(201).json({ id: user.id });
+  } catch {
+    return res.status(409).json('El usuario ya existe');
+  }
 };
 
 /**
@@ -99,15 +119,21 @@ exports.createUsuario = async (req, res) => {
  */
 exports.updateUsuarioById = async (req, res) => {
   try {
-    let body = req.body;
-    let data = await Usuario.update(body, {
+    const { body } = req;
+    if (body.contrasena !== undefined && body.contrasena !== '') {
+      body.contrasena = crypto.createHash('sha256').update(body.contrasena).digest('base64');
+    } else if (body.contrasena === '') {
+      delete body.contrasena;
+    }
+
+    await Usuario.update(body, {
       where: {
         id: req.params.usuarioId,
       },
     });
-    res.status(200).json(req.body);
+    return res.status(200).json('Usuario actualizado exitosamente');
   } catch (error) {
-    res.status(400).json('Error en la actualizacion');
+    return res.status(409).json('Error en la actualizacion');
   }
 };
 
@@ -123,7 +149,7 @@ exports.getUsuarioById = async (req, res) => {
     },
   });
 
-  res.status(200).json(data);
+  return res.status(200).json(data);
 };
 exports.getMyUser = async (req, res) => {
   console.log(auth.usuario);

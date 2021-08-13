@@ -33,12 +33,12 @@ exports.TipoPublicacion = {
   NOTICIA: 'Noticia',
 };
 
-exports.UbicacionMascota = {
+/*exports.UbicacionMascota = {
   REFUGIO: 'Refugio',
   EXTERNO: 'Externo',
   DENTRO_ESPOL: 'Dentro espol',
   HOGAR_TEMPORAL: 'Hogar temporal',
-};
+};*/
 exports.TipoMascota = {
   GATO: 'Gato',
   PERRO: 'Perro',
@@ -56,7 +56,7 @@ exports.EstadoSolicitud = {
   APROBADO: 'Aprobado',
   RECHAZADO: 'Rechazado',
 };
-exports.UbicacionMascotaPolitecnica = {
+exports.UbicacionMascota = {
   FICT: 'FICT',
   FIMCP: 'FIMCP',
   FIEC: 'FIEC',
@@ -69,6 +69,7 @@ exports.UbicacionMascotaPolitecnica = {
   FEPOL: 'FEPOL',
   GTSI: 'GTSI',
   FCV: 'FCV',
+  EXTERNO: 'Externo',
 };
 
 exports.ColorMascota = {
