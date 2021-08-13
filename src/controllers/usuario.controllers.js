@@ -152,13 +152,8 @@ exports.getUsuarioById = async (req, res) => {
   return res.status(200).json(data);
 };
 exports.getMyUser = async (req, res) => {
-  console.log(auth.usuario);
-  const data = await Usuario.findOne({
-    where: {
-      id: auth.usuario.id,
-    },
-  });
-
+  const { id } = req.user;
+  const data = await Usuario.findOne({ where: { id } });
   res.status(200).json(data);
 };
 
