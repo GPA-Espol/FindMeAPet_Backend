@@ -1,4 +1,8 @@
 exports.RolUsuario = {
+  VOLUNTARIO: 'Voluntario',
+  ADMIN: 'Admin',
+};
+exports.RolUsuarioBase = {
   VOLUNTARIO: 2,
   ADMIN: 1,
 };
@@ -51,6 +55,30 @@ exports.EstadoSolicitud = {
   PENDIENTE: 'Pendiente',
   APROBADO: 'Aprobado',
   RECHAZADO: 'Rechazado',
+};
+exports.UbicacionMascotaPolitecnica = {
+  FICT: 'FICT',
+  FIMCP: 'FIMCP',
+  FIEC: 'FIEC',
+  ASO_FIMCP: 'ASO FIMCP',
+  CELEX: 'CELEX',
+  MASTERADOS_FCSH: 'Masterados FCSH',
+  AUDITORIA_FCSH: 'Auditoría FCSH',
+  LABS_FCSH: 'Laboratorios FCSH',
+  FOTOCOPIADORAS: 'Fotocopiadoras',
+  FEPOL: 'FEPOL',
+  GTSI: 'GTSI',
+  FCV: 'FCV',
+};
+
+exports.ColorMascota = {
+  BLANCO: 'Blanco',
+  NEGRO: 'Negro',
+  CAREY: 'Bicolor',
+  CALICO: 'Calicó',
+  GRIS: 'Gris',
+  ROMANO: 'Romano',
+  NARANJA: 'Naranja',
 };
 
 exports.tipoEstado = {

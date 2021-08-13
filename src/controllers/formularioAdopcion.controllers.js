@@ -226,7 +226,7 @@ async function enviarNotificacion() {
 
   const usuarios = await Usuario.findAll({
     where: {
-      id_rol: enums.RolUsuario.ADMIN,
+      id_rol: enums.RolUsuarioBase.ADMIN,
     },
     attributes: ['usuario', 'device_id'],
   });

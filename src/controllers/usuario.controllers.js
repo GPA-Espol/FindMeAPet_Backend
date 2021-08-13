@@ -1,5 +1,6 @@
 const Usuario = require('../models/usuario');
 const crypto = require('crypto');
+const enums = require('../util/enum.model');
 
 /**
  * Usuario controller
@@ -12,7 +13,7 @@ const crypto = require('crypto');
  * @param {HTTP} rep - HTTP response status 200 is succesfully, Otherwise 400
  */
 exports.getUsuarios = async (req, res) => {
-  const data = await Usuario.findAll({
+  const usuarios = await Usuario.findAll({
     attributes: [
       'id',
       'usuario',
@@ -28,10 +29,19 @@ exports.getUsuarios = async (req, res) => {
       'id_rol',
     ],
   });
+  let irol;
+  let tipoRol = Object.keys(enums.RolUsuarioBase);
+  for (usuario of usuarios) {
+    irol = 0;
+    id_rol = usuario['dataValues']['id_rol'];
 
-  res.status(200).json(data);
+    while (id_rol != enums.RolUsuarioBase[tipoRol[irol]]) {
+      irol += 1;
+    }
+    usuario['dataValues']['rol'] = enums.RolUsuario[tipoRol[irol]];
+  }
+  res.status(200).json(usuarios);
 };
-
 /**
  * Receive an HTTP request to create a user on the database
  * @param {HTTP} req - HTTP request

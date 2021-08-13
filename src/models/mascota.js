@@ -51,6 +51,9 @@ Mascota.init(
       allowNull: false,
     },
     imagen_url: DataTypes.STRING(400),
+    ubicacion_mascota_politecnica: {
+      type: DataTypes.STRING(50),
+    },
   },
   { underscored: true, sequelize, modelName: 'mascota', timestamps: false }
 );
