@@ -1,5 +1,7 @@
 const Usuario = require('../models/usuario');
 const enums = require('../util/enum.model');
+const auth = require('./auth.controllers');
+const crypto = require('crypto');
 
 /**
  * Usuario controller
@@ -57,7 +59,6 @@ exports.createUsuario = async (req, res) => {
     sexo,
     is_est_espol,
     imagen_url,
-    estado,
     id_rol,
   } = req.body;
   if (
@@ -69,8 +70,6 @@ exports.createUsuario = async (req, res) => {
     fecha_nacimiento == undefined ||
     sexo === undefined ||
     is_est_espol === undefined ||
-    imagen_url === undefined ||
-    estado === undefined ||
     id_rol === undefined
   ) {
     res.status(400).json('Debe llenar todos los campos');
@@ -79,14 +78,14 @@ exports.createUsuario = async (req, res) => {
   const u = await Usuario.create({
     usuario: usuario,
     correo: correo,
-    contrasena: contrasena,
+    contrasena: crypto.createHash('sha256').update(contrasena).digest('base64'),
     nombre: nombre,
     apellido: apellido,
     fecha_nacimiento: fecha_nacimiento,
     sexo: sexo,
     is_est_espol: is_est_espol,
     imagen_url: imagen_url,
-    estado: estado,
+    estado: 'A',
     id_rol: id_rol,
   }).then((user) => {
     res.status(201).json(req.body);
@@ -121,6 +120,16 @@ exports.getUsuarioById = async (req, res) => {
   const data = await Usuario.findOne({
     where: {
       id: req.params.usuarioId,
+    },
+  });
+
+  res.status(200).json(data);
+};
+exports.getMyUser = async (req, res) => {
+  console.log(auth.usuario);
+  const data = await Usuario.findOne({
+    where: {
+      id: auth.usuario.id,
     },
   });
 
