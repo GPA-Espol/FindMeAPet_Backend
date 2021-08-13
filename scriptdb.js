@@ -18,6 +18,180 @@ async function loaddb() {
 
 async function loadMascota() {
   await Mascota.create({
+    nombre: 'Mila',
+    fecha_nacimiento: '2021-05-01',
+    color: enums.ColorMascota.BLANCO,
+    is_esterilizado: 0,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    descripcion: 'Es carinosa',
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.FCV,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FEPOL,
+    tipo_mascota: enums.TipoMascota.GATO,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/mila.jpeg?alt=media&token=0fa957b8-89a1-49a6-bd41-6c1dc41fdb9f',
+  });
+  await Mascota.create({
+    nombre: 'July',
+    fecha_nacimiento: '2018-12-01',
+    color: enums.ColorMascota.NARANJA,
+    is_esterilizado: 1,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    descripcion: 'Se lleva bien con gatitos',
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.CELEX,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.CELEX,
+    tipo_mascota: enums.TipoMascota.PERRO,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/july.jpg?alt=media&token=b2e2516e-13cc-424e-91ce-6439c636be98',
+  });
+  await Mascota.create({
+    nombre: 'Lula',
+    fecha_nacimiento: '2010-12-01',
+    color: enums.ColorMascota.NEGRO,
+    is_esterilizado: 1,
+    is_adoptado: 1,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    descripcion: 'Se lleva bien con gatitos',
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.CELEX,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.CELEX,
+    tipo_mascota: enums.TipoMascota.PERRO,
+    fecha_adopcion: '2020-11-01',
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/lula.jpg?alt=media&token=98d7416d-5f33-4b5f-80a4-ed0118b513f8',
+  });
+  await Mascota.create({
+    nombre: 'Empanada',
+    fecha_nacimiento: '2015-12-01',
+    color: enums.ColorMascota.CAREY,
+    is_esterilizado: 1,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    descripcion: 'Es carinosa',
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.LABS_FCSH,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.CELEX,
+    tipo_mascota: enums.TipoMascota.GATO,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/empanada.jpg?alt=media&token=3fba147e-bcab-4ec6-aa8d-2d43d2adc74f',
+  });
+  await Mascota.create({
+    nombre: 'Ennie',
+    fecha_nacimiento: '2021-02-15',
+    color: enums.ColorMascota.NEGRO,
+    is_esterilizado: 0,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    descripcion: 'Es juguetona',
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.FCV,
+    tipo_mascota: enums.TipoMascota.GATO,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/ennie.PNG?alt=media&token=e12c4b13-459b-4fa1-8e01-25ec02f43017',
+  });
+  ('');
+  await Mascota.create({
+    nombre: 'Balto',
+    fecha_nacimiento: '2020-01-01',
+    color: enums.ColorMascota.CAREY,
+    is_esterilizado: 0,
+    is_adoptado: 1,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    descripcion: 'Es muy jugueton',
+    sexo: 'M',
+    ubicacion: enums.UbicacionMascota.FCV,
+    tipo_mascota: enums.TipoMascota.PERRO,
+    fecha_adopcion: '2020-01-09',
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/balto.jpg?alt=media&token=6134d4e2-2c14-4450-be5b-a49be915679a',
+  });
+  await Mascota.create({
+    nombre: 'Tais',
+    fecha_nacimiento: '2021-05-05',
+    color: enums.ColorMascota.ROMANO,
+    is_esterilizado: 1,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.FCV,
+    tipo_mascota: enums.TipoMascota.GATO,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/hembrita1.jpeg?alt=media&token=aa65c588-99bc-42d3-8b3b-f7b4a35bc3ec',
+  });
+  await Mascota.create({
+    nombre: 'Madonna',
+    fecha_nacimiento: '2021-05-01',
+    color: enums.ColorMascota.CAREY,
+
+    is_esterilizado: 1,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.FCV,
+    tipo_mascota: enums.TipoMascota.GATO,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/carey.jpeg?alt=media&token=184c97b1-1aeb-47ba-86dd-3f910057a16f',
+  });
+  await Mascota.create({
+    nombre: 'Nieves',
+    fecha_nacimiento: '2021-01-01',
+    color: enums.ColorMascota.BLANCO,
+    is_esterilizado: 1,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.FCV,
+    tipo_mascota: enums.TipoMascota.GATO,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/unknown%2Fblanquita.jpeg?alt=media&token=071ed5f2-d5a4-4b1f-9df4-daed2a1a9826',
+  });
+  await Mascota.create({
+    nombre: 'Luna',
+    fecha_nacimiento: '2020-02-01',
+    color: enums.ColorMascota.NEGRO,
+    is_esterilizado: 1,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.FCV,
+    tipo_mascota: enums.TipoMascota.GATO,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/unknown%2Fnegrita.jpeg?alt=media&token=6c2b7b95-c06c-40ff-988e-74062a606eff',
+  });
+  await Mascota.create({
+    nombre: 'Panda',
+    fecha_nacimiento: '2021-02-01',
+    color: enums.ColorMascota.BLANCO,
+    is_esterilizado: 1,
+    is_adoptado: 0,
+    is_caso_externo: 0,
+    is_adoptable: 1,
+    sexo: 'H',
+    ubicacion: enums.UbicacionMascota.FCV,
+    tipo_mascota: enums.TipoMascota.GATO,
+    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
+    imagen_url:
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/unknown%2Fhembrita2.jpeg?alt=media&token=432186f5-5f1b-4b33-924b-02b4f91efb44',
+  });
+  await Mascota.create({
     nombre: 'Peluso',
     fecha_nacimiento: '2018-12-01',
     color: enums.ColorMascota.GRIS,
@@ -28,111 +202,48 @@ async function loadMascota() {
     descripcion: 'Es cazador y muy jugueton',
     sexo: 'M',
     fecha_adopcion: '2019-01-01',
-    ubicacion: enums.UbicacionMascota.FICT,
+    ubicacion: enums.UbicacionMascota.FCV,
     tipo_mascota: enums.TipoMascota.GATO,
     //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FICT,
     imagen_url:
-      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/amarillo.jpg?alt=media&token=40a75d30-d4b1-4417-9a29-897a4a9ae068',
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/peluso.jpeg?alt=media&token=d1326487-2a1d-45ba-a4f6-bb16d4e79dd4',
   });
   await Mascota.create({
     nombre: 'Cenicienta',
-    fecha_nacimiento: '2021-02-01',
-    color: enums.ColorMascota.NARANJA,
+    fecha_nacimiento: '2018-12-01',
+
+    color: enums.ColorMascota.GRIS,
 
     is_esterilizado: 1,
     is_adoptado: 1,
     is_caso_externo: 0,
     is_adoptable: 1,
+    fecha_adopcion: '2019-01-01',
+
     descripcion: 'Es muy juguetona',
     sexo: 'H',
     ubicacion: enums.UbicacionMascota.FCV,
     //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
     tipo_mascota: enums.TipoMascota.GATO,
     imagen_url:
-      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pensando%20en%20ti.webp?alt=media&token=053b73a1-0f8b-4e5e-9d6e-1d7b216b09da',
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/cenicienta.jpeg?alt=media&token=39bf03f6-7473-495f-98c1-18e562477d43',
   });
   await Mascota.create({
-    nombre: 'Mimi',
-    fecha_nacimiento: '2010-12-01',
-    color: enums.ColorMascota.ROMANO,
-    is_esterilizado: 1,
-    is_adoptado: 0,
-    is_caso_externo: 0,
-    is_adoptable: 1,
-    descripcion: 'Es carinosa',
-    sexo: 'H',
-    ubicacion: enums.UbicacionMascota.FEPOL,
-    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FEPOL,
-    tipo_mascota: enums.TipoMascota.GATO,
-    imagen_url:
-      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pantera.jpg?alt=media&token=ac4c584d-bc50-49ad-ac3f-826d02225cf8',
-  });
-  await Mascota.create({
-    nombre: 'Panda',
-    fecha_nacimiento: '2010-12-01',
-    color: enums.ColorMascota.CAREY,
-    is_esterilizado: 0,
-    is_adoptado: 0,
-    is_caso_externo: 0,
-    is_adoptable: 0,
-    descripcion: 'Es feroz',
-    sexo: 'M',
-    ubicacion: enums.UbicacionMascota.CELEX,
-    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.CELEX,
-    tipo_mascota: enums.TipoMascota.GATO,
-    imagen_url:
-      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pensando%20en%20ti.webp?alt=media&token=053b73a1-0f8b-4e5e-9d6e-1d7b216b09da',
-  });
-  await Mascota.create({
-    nombre: 'Pototo',
-    fecha_nacimiento: '2021-02-15',
-    color: enums.ColorMascota.NEGRO,
-    is_esterilizado: 0,
-    is_adoptado: 0,
-    is_caso_externo: 1,
-    is_adoptable: 1,
-    descripcion: 'Es juguetona',
-    sexo: 'M',
-    ubicacion: enums.UbicacionMascota.EXTERNO,
-    tipo_mascota: enums.TipoMascota.GATO,
-    imagen_url:
-      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/pantera.jpg?alt=media&token=ac4c584d-bc50-49ad-ac3f-826d02225cf8',
-  });
-  await Mascota.create({
-    nombre: 'Oreo',
-    fecha_nacimiento: '2021-01-01',
-    color: enums.ColorMascota.NEGRO,
-    is_esterilizado: 0,
-    is_adoptado: 0,
-    is_caso_externo: 0,
-    is_adoptable: 1,
-    descripcion: 'Es muy jugueton',
-    sexo: 'M',
-    ubicacion: enums.UbicacionMascota.FCV,
-    tipo_mascota: enums.TipoMascota.PERRO,
-    //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
-
-    imagen_url:
-      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/husky-siberiano-bosque.jpg?alt=media&token=ad47cd95-ab9a-4150-aab2-ff3b37a2648f',
-  });
-  await Mascota.create({
-    nombre: 'Teo',
+    nombre: 'Teito',
     fecha_nacimiento: '2018-12-01',
     color: enums.ColorMascota.ROMANO,
-
     is_esterilizado: 1,
     is_adoptado: 1,
     is_caso_externo: 0,
     is_adoptable: 1,
-    descripcion: 'Es cazador y muy jugueton',
-    sexo: 'M',
     fecha_adopcion: '2019-01-01',
+    descripcion: 'Es muy cazador y juguetón',
+    sexo: 'M',
     ubicacion: enums.UbicacionMascota.FCV,
-    tipo_mascota: enums.TipoMascota.GATO,
     //ubicacion_mascota_politecnica: enums.UbicacionMascotaPolitecnica.FCV,
-
+    tipo_mascota: enums.TipoMascota.GATO,
     imagen_url:
-      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/teito.jpg?alt=media&token=1d2d830d-9962-4f99-ac7f-7616d76ec91a',
+      'https://firebasestorage.googleapis.com/v0/b/gpa-findmepet.appspot.com/o/teito.jpeg?alt=media&token=fd1dc15f-6092-4fcd-8bc3-217cf505f2ae',
   });
 }
 
