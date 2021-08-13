@@ -68,6 +68,7 @@ exports.UbicacionMascotaPolitecnica = {
   FOTOCOPIADORAS: 'Fotocopiadoras',
   FEPOL: 'FEPOL',
   GTSI: 'GTSI',
+  FCV: 'FCV',
 };
 
 exports.ColorMascota = {
