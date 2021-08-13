@@ -26,7 +26,6 @@ exports.getMascotas = async (req, res) => {
       'ubicacion',
       'tipo_mascota',
       'imagen_url',
-      'ubicacion_mascota_politecnica',
     ],
   });
   for (imascota in data) {
@@ -64,7 +63,6 @@ exports.createMascota = async (req, res) => {
     ubicacion,
     tipo_mascota,
     imagen_url,
-    ubicacion_mascota_politecnica,
   } = req.body;
   if (
     nombre === undefined ||
@@ -96,7 +94,6 @@ exports.createMascota = async (req, res) => {
     ubicacion: ubicacion,
     tipo_mascota: tipo_mascota,
     imagen_url: imagen_url,
-    ubicacion_mascota_politecnica: ubicacion_mascota_politecnica,
   });
   res.status(201).json({ id: mascota.getDataValue('id') });
 };
