@@ -8,6 +8,7 @@ const authAdmin = passport.authenticate('jwt-admin', { session: false });
 
 routers.get('/', authAdmin, formularioAdopcionController.getFormulariosAdopcion);
 routers.post('/', formularioAdopcionController.createAdopteForm);
+routers.get('/:id', authAdmin, formularioAdopcionController.getFormulariosAdopcionById);
 routers.put('/status', authAdmin, formularioAdopcionController.editStatus);
 
 module.exports = routers;

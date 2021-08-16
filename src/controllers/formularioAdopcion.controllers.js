@@ -239,3 +239,18 @@ async function enviarNotificacion() {
   }
 }
 exports.editStatus = async (req, res) => {};
+
+exports.getFormulariosAdopcionById = async (req, res) => {
+  const data = await FormularioAdopcion.findByPk(req.params.id);
+  if (data === null) {
+    return res.status(404).json('No existe una solicitud de adopción con ese id!');
+  }
+  await FormularioAdopcion.findOne({ where: { id: req.params.id } })
+    .then((solicitud) => {
+      return res.status(200).json(data);
+    })
+    .catch((err) => {
+      return res.status(409).json('Ha ocurrido un error, intente de nuevo');
+    });
+  //return res.status(200).json(data);
+};
