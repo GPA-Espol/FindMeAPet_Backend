@@ -17,12 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:14.5.0-alpine
+      container_name: testing
     services:
       mysql-master:
         image: mysql:5.7
         ports:
           - 3306/tcp
         env:
+          MYSQL_HOST: testing
           MYSQL_DATABASE: ${{ env.PROD_DB_NAME }}
           MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
           MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
