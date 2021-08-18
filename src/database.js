@@ -10,6 +10,11 @@ const config = require('./dbconfig');
  * @property {Object} host - Host and dialect of the database
  */
 
+console.log(config.production.database);
+console.log(config.production.username);
+console.log(config.production.password);
+console.log(config.production.host);
+
 /**
  * @type {Sequelize}
  */
