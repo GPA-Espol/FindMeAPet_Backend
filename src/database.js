@@ -28,4 +28,18 @@ const sequelize = new Sequelize(
   }
 );
 
+try {
+  const lel = new Sequelize(
+    config.production.database,
+    config.production.username,
+    config.production.password,
+    {
+      host: config.production.host,
+      dialect: config.production.dialect,
+    }
+  );
+} catch (err) {
+  console.log('Errrorr', err);
+}
+
 module.exports = sequelize;
