@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:14.5.0-alpine
-      container_name: testing
+      name: testing
     services:
       mysql-master:
         image: mysql:5.7
