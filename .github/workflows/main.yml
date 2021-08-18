@@ -1,9 +1,9 @@
 name: Testing
 env:
-  PROD_DB_USERNAME: test
-  PROD_DB_PASSWORD: test
+  PROD_DB_USERNAME: root
+  PROD_DB_PASSWORD:
   PROD_DB_NAME: gpa_testing
-  PROD_DB_HOSTNAME: "127.0.0.1"
+  PROD_DB_HOSTNAME: 127.0.0.1
   PORT: 3000
   JWT_SECRET_KEY_FMAP: test
 on:
@@ -17,29 +17,24 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:14.15.0-alpine
-    # services:
-    #   mysql-master:
-    #     image: mysql:8.0
-    #     ports:
-    #       - 3306/tcp
-    #     env:
-    #       MYSQL_DATABASE: ${{ env.PROD_DB_NAME }}
-    #       MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
-    #       MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
-    #       MYSQL_ROOT_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
-    #     options: >-
-    #       --name=mysql-master
-    #       --health-cmd="mysqladmin ping"
-    #       --health-interval=10s
-    #       --health-timeout=5s
-    #       --health-retries=3
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_HOST: ${{ PROD_DB_HOSTNAME }}
+          MYSQL_DB: ${{ env.PROD_DB_NAME }}
+          MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_PASSWORD:
+        ports:
+          - "3306:3306"
     steps:
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql database: ${{ env.PROD_DB_NAME }}
-          mysql root password: ${{ env.PROD_DB_PASSWORD }}
-          mysql user: ${{ env.PROD_DB_USERNAME }}
-          mysql password: ${{ env.PROD_DB_PASSWORD }}
+      # - uses: mirromutth/mysql-action@v1.1
+      #   with:
+      #     mysql database: ${{ env.PROD_DB_NAME }}
+      #     mysql root password: ${{ env.PROD_DB_PASSWORD }}
+      #     mysql user: ${{ env.PROD_DB_USERNAME }}
+      #     mysql password: ${{ env.PROD_DB_PASSWORD }}
       - uses: actions/checkout@v2
       - name: setup
         run: npm ci
