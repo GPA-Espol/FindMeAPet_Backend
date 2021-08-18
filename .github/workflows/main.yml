@@ -1,7 +1,7 @@
 name: Testing
 env:
   PROD_DB_USERNAME: root
-  PROD_DB_PASSWORD: root
+  PROD_DB_PASSWORD:
   PROD_DB_NAME: gpa_testing
   PROD_DB_HOSTNAME: 127.0.0.1
   PORT: 3000
@@ -37,6 +37,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.15
+      - name: Verify MySQL connection from host
+      run: |
+        sudo apt-get install -y mysql-client libmysqlclient-dev
+        mysql --host 127.0.0.1 --port 3306 -uroot -proot -e "SHOW GRANTS FOR 'root'@'localhost'"
+        mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql --host 127.0.0.1 --port 3306 -uroot -proot mysql
       - name: setup
         run: npm ci
       - name: setup jest
