@@ -26,7 +26,7 @@ jobs:
           MYSQL_DATABASE: ${{ env.PROD_DB_NAME }}
           MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
           MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
-          MYSQL_ROOT_PASSWORD: test
+          MYSQL_ROOT_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
       - name: setup
