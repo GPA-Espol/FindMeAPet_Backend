@@ -16,24 +16,30 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     container:
-      image: node:14.5.0-alpine
-    services:
-      mysql-master:
-        image: mysql:8.0
-        ports:
-          - 3306/tcp
-        env:
-          MYSQL_DATABASE: ${{ env.PROD_DB_NAME }}
-          MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
-          MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
-          MYSQL_ROOT_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
-        options: >-
-          --name=mysql-master
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
+      image: node:14.15.0-alpine
+    # services:
+    #   mysql-master:
+    #     image: mysql:8.0
+    #     ports:
+    #       - 3306/tcp
+    #     env:
+    #       MYSQL_DATABASE: ${{ env.PROD_DB_NAME }}
+    #       MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
+    #       MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
+    #       MYSQL_ROOT_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
+    #     options: >-
+    #       --name=mysql-master
+    #       --health-cmd="mysqladmin ping"
+    #       --health-interval=10s
+    #       --health-timeout=5s
+    #       --health-retries=3
     steps:
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql database: ${{ env.PROD_DB_NAME }}
+          mysql root password: ${{ env.PROD_DB_PASSWORD }}
+          mysql user: ${{ env.PROD_DB_USERNAME }}
+          mysql password: ${{ env.PROD_DB_PASSWORD }}
       - uses: actions/checkout@v2
       - name: setup
         run: npm ci
