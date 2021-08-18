@@ -10,11 +10,6 @@ const config = require('./dbconfig');
  * @property {Object} host - Host and dialect of the database
  */
 
-console.log(config.production.database);
-console.log(config.production.username);
-console.log(config.production.password);
-console.log(config.production.host);
-
 /**
  * @type {Sequelize}
  */
@@ -27,20 +22,5 @@ const sequelize = new Sequelize(
     dialect: config.production.dialect,
   }
 );
-
-try {
-  const lel = new Sequelize(
-    config.production.database,
-    config.production.username,
-    config.production.password,
-    {
-      host: config.production.host,
-      dialect: config.production.dialect,
-    }
-  );
-  lel.sync();
-} catch (err) {
-  console.log('Errrorr', err);
-}
 
 module.exports = sequelize;
