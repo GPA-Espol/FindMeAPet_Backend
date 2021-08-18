@@ -3,7 +3,7 @@ env:
   PROD_DB_USERNAME: test
   PROD_DB_PASSWORD: test
   PROD_DB_NAME: gpa_testing
-  PROD_DB_HOSTNAME: 127.0.0.1
+  PROD_DB_HOSTNAME: "127.0.0.1"
   PORT: 3000
   JWT_SECRET_KEY_FMAP: test
 on:
@@ -23,7 +23,7 @@ jobs:
         ports:
           - 3306/tcp
         env:
-          MYSQL_HOST: 127.0.0.1
+          MYSQL_HOST: "127.0.0.1"
           MYSQL_DATABASE: ${{ env.PROD_DB_NAME }}
           MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
           MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
