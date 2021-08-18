@@ -44,13 +44,12 @@ describe("Pet's Service", () => {
     });
   });
 
-  test('PE-01 GET/mascota -- should get all pets', async (done) => {
+  test('PE-01 GET/mascota -- should get all pets', async () => {
     const mascota = await Mascota.create(dato_mascota);
 
-    api
-      .get('/mascota')
-      .expect(200)
-      .then((response) => {
+    const response = await api.get('/mascota').expect(200);
+    expect(response.body).toBeTruthy();
+    /*.then((response) => {
         expect(Array.isArray(response.body)).toBeTruthy();
         /*expect(response.body.length).toEqual(1);
         expect(response.body[0].id).toBe(mascota.id);
@@ -67,8 +66,8 @@ describe("Pet's Service", () => {
         expect(response.body[0].ubicacion).toBe(mascota.ubicacion);
         expect(response.body[0].tipo_mascota).toBe(mascota.tipo_mascota);
         expect(response.body[0].imagen_url).toBe(mascota.imagen_url);*/
-        done();
-      });
+    /*done();
+      });*/
   });
 
   /*test('PE-02 GET /mascota/:id -- should get a pet ', async (done) => {
