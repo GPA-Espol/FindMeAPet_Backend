@@ -6,8 +6,7 @@ env:
   PROD_DB_HOSTNAME: 127.0.0.1
   PORT: 3000
   JWT_SECRET_KEY_FMAP: test
-on: 
-  push:
+on: [push]
   # pull_request:
   #   branches:
   #     - develop
