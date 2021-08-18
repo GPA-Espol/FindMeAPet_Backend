@@ -27,6 +27,12 @@ jobs:
           MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
           MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
           MYSQL_ROOT_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
+        options: >-
+          --name=mysql-master
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
     steps:
       - uses: actions/checkout@v2
       - name: setup
