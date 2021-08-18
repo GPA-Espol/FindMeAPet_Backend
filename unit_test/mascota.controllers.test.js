@@ -2,7 +2,6 @@ const createServer = require('../src/app');
 const supertest = require('supertest');
 const sequelize = require('../src/database');
 const Mascota = require('../src/models/mascota');
-jest.setTimeout(30000);
 
 const dato_mascota = {
   nombre: 'Peluso',
