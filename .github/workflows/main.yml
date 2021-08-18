@@ -1,7 +1,7 @@
 name: Testing
 env:
   PROD_DB_USERNAME: root
-  PROD_DB_PASSWORD:
+  PROD_DB_PASSWORD: root
   PROD_DB_NAME: gpa_testing
   PROD_DB_HOSTNAME: 127.0.0.1
   PORT: 3000
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:5.7
         env:
           MYSQL_HOST: 127.0.0.1
           MYSQL_DB: gpa_testing
@@ -25,7 +25,7 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_PASSWORD:
         ports:
-          - "3306:3306"
+          - 3306
     steps:
       # - uses: mirromutth/mysql-action@v1.1
       #   with:
