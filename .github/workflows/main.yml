@@ -6,7 +6,8 @@ env:
   PROD_DB_HOSTNAME: 127.0.0.1
   PORT: 3000
   JWT_SECRET_KEY_FMAP: test
-on: [push]
+on:
+  [push]
   # pull_request:
   #   branches:
   #     - develop
@@ -21,11 +22,11 @@ jobs:
         image: mysql:5.7
         ports:
           - 3306/tcp
-          env: 
-            MYSQL_DATABASE: ${{ env.PROD_DB_NAME }}
-            MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
-            MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
-            MYSQL_ROOT_PASSWORD: test
+        env:
+          MYSQL_DATABASE: ${{ env.PROD_DB_NAME }}
+          MYSQL_USER: ${{ env.PROD_DB_USERNAME }}
+          MYSQL_PASSWORD: ${{ env.PROD_DB_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: test
     steps:
       - uses: actions/checkout@v2
       - name: setup
