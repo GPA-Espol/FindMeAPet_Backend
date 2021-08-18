@@ -38,6 +38,7 @@ try {
       dialect: config.production.dialect,
     }
   );
+  lel.sync();
 } catch (err) {
   console.log('Errrorr', err);
 }
