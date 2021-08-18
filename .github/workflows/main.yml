@@ -1,7 +1,7 @@
 name: Testing
 env:
   PROD_DB_USERNAME: root
-  PROD_DB_PASSWORD:
+  PROD_DB_PASSWORD: root
   PROD_DB_NAME: gpa_testing
   PROD_DB_HOSTNAME: 127.0.0.1
   PORT: 3000
