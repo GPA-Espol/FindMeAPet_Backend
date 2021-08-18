@@ -36,8 +36,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.15
-      - name: Verify MySQL connection from host
+      - name: Starting service
         run: sudo systemctl start mysql
+      - name: Creating database
+        run: mysql -u root -p${{ env.PROD_DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${{ env.PROD_DB_NAME }};"
       - name: setup
         run: npm ci
       - name: setup jest
