@@ -6,7 +6,7 @@ const Mascota = require('../models/mascota');
  * @module SolicitudActualkizacionMascotaControllers
  */
 
-mascotaCampos = {
+const mascotaCampos = {
   nombre: null,
   fecha_nacimiento: null,
   fecha_adopcion: null,
