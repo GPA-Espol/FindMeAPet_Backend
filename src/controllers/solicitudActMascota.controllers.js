@@ -3,10 +3,10 @@ const enumModels = require('../util/enum.model');
 const Mascota = require('../models/mascota');
 /**
  * SolciitudActualizacionMascota controller
- * @module SolicitudActualkizacionMascotaControllers
+ * @module SolicitudActualizacionMascotaControllers
  */
 
-mascotaCampos = {
+const mascotaCampos = {
   nombre: null,
   fecha_nacimiento: null,
   fecha_adopcion: null,
