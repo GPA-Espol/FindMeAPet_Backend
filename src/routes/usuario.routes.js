@@ -3,8 +3,8 @@ const routers = Router();
 const usuarioController = require('../controllers/usuario.controllers');
 const passport = require('passport');
 
-const auth = passport.authenticate('jwt', { session: false });
-const authAdmin = passport.authenticate('jwt-admin', { session: false });
+const auth = passport.authorize('jwt', { session: false });
+const authAdmin = passport.authorize('jwt-admin', { session: false });
 
 routers.post('/', authAdmin, usuarioController.createUsuario);
 routers.get('/', authAdmin, usuarioController.getUsuarios);

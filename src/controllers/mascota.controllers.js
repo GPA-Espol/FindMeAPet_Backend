@@ -28,7 +28,7 @@ exports.getMascotas = async (req, res) => {
       'imagen_url',
     ],
   });
-  for (const imascota in data) {
+  for (let imascota in data) {
     var edad = getAge(data[imascota]['fecha_nacimiento']);
     if (edad > 0) {
       data[imascota]['dataValues']['categoria_edad'] = 'cachorro';

@@ -1,0 +1,41 @@
+name: Testing
+env:
+  PROD_DB_USERNAME: root
+  PROD_DB_PASSWORD: root
+  PROD_DB_NAME: gpa_testing
+  PROD_DB_HOSTNAME: 127.0.0.1
+  PORT: 3000
+  JWT_SECRET_KEY_FMAP: test
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_DATABASE: gpa_testing
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+        ports:
+          - 3306/tcp
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.15
+      - name: Starting service
+        run: sudo systemctl start mysql
+      - name: Creating database
+        run: mysql -u root -p${{ env.PROD_DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${{ env.PROD_DB_NAME }};"
+      - name: setup
+        run: npm ci
+      - name: setup jest
+        run: npm i -g jest
+      - name: test
+        run: npm test
