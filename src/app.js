@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-
+require('./auth/auth');
 const mascotaRoutes = require('./routes/mascota.routes');
 const authRoutes = require('./routes/auth.routes');
 const usuarioRoutes = require('./routes/usuario.routes');

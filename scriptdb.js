@@ -15,6 +15,10 @@ async function loaddb() {
   // await loadFormularioAdopcion();
   await loadPublicacion();
 }
+async function loadsample() {
+  await loadRol();
+  await loadUsuario();
+}
 
 async function loadMascota() {
   await Mascota.create({
@@ -319,14 +323,12 @@ async function loadRol() {
 }
 async function loadReporteAsistencia() {
   await ReporteAsistencia.create({
-    comida: 'Un cuarto',
-    mapa: '1-1-1-1-1-1-1-1-1-1-1-1-1-1',
+    comida: enums.CantidadComida.UN_CUARTO,
     id_usuario: 1,
   });
   await ReporteAsistencia.create({
-    comida: 'Un medio',
+    comida: enums.CantidadComida.UN_MEDIO,
     anomalia: 'Se registro comida fuera de los puntos de comida',
-    mapa: '1-1-1-1-1-1-1-1-1-1-1-1-1-1',
     id_usuario: 2,
   });
 }
@@ -384,4 +386,4 @@ async function loadPublicacion() {
   });
 }
 
-module.exports = { loaddb };
+module.exports = { loaddb, loadsample };
